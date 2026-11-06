@@ -1,12 +1,10 @@
 # Yixuan He 个人网站
 
-## https://xavierhe0630.github.io/resume/#resume
-
-
 两个页面：
 
 - `index.html`：主站，四个页面（个人履历 / 易经问卜 / 塔罗梳理 / 倾诉倾听），带中英切换和预约系统
-- `resume.html`：独立简历页，只有履历，右上角可以切换语言、点「Download CV」下载 `assets/Yixuan_CV.pdf`
+- `resume/index.html`：独立简历页，网址是 `https://xavierhe0630.github.io/resume/`，只有履历，右上角可以切换语言、点「Download CV」下载 `assets/Yixuan_CV.pdf`
+- `resume.html`：只用来把旧网址自动跳转到 `resume/`
 
 两个页面的简历内容都来自同一个文件 `js/resume-data.js`，改一次两边一起更新。
 
@@ -14,7 +12,8 @@
 
 ```
 index.html            主站
-resume.html           独立简历
+resume/index.html     独立简历（网址 /resume/）
+resume.html           旧网址跳转
 css/site.css          全部样式
 js/config.js          ← 预约后台地址、Zelle 信息（上线前要填）
 js/resume-data.js     ← 简历内容（中英双语）
@@ -36,7 +35,7 @@ apps-script/Code.gs   预约后台代码（贴到 Google Apps Script，不需要
 2. 把这个文件夹里的所有文件上传到仓库根目录（网页上点 Add file → Upload files，拖进去即可）。
 3. 仓库 Settings → Pages → Source 选 `Deploy from a branch`，Branch 选 `main`、文件夹选 `/ (root)`，保存。
 4. 等一两分钟，网站就会出现在 `https://你的用户名.github.io/`（或 `https://你的用户名.github.io/仓库名/`）。
-5. 独立简历的地址是在后面加 `resume.html`，求职时发这个链接。
+5. 独立简历的地址是在后面加 `resume/`，求职时发这个链接。
 
 想用自己的域名：Settings → Pages → Custom domain 填域名，再按提示在域名服务商那里加一条 DNS 记录。
 

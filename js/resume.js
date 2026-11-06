@@ -35,6 +35,12 @@
     if (!m) return s;
     return zh() ? m[1] + "." + m[2] : MONTHS[+m[2] - 1] + " " + m[1];
   }
+  // 页面在子文件夹（如 /resume/）时，图片路径要加上前缀
+  function src(p) {
+    var base = window.SITE_BASE || "";
+    if (!p || /^(data:|https?:|\/)/.test(p)) return p;
+    return base + p;
+  }
   function range(w) { return w ? d(w[0]) + " – " + d(w[1]) : ""; }
   var IMG = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="10" r="2"/><path d="M21 17l-5-5-9 8"/></svg>';
 
@@ -78,8 +84,8 @@
 
     var E = R.education;
     h += '<section class="sec c2" id="education">' + head("education") +
-      '<div class="edu-grid"><figure class="schools-shot"><img src="' + esc(E.schoolsImage) + '" alt="' + esc(t(LAB.schoolsAlt)) + '" loading="lazy"></figure>' +
-      '<div class="edu-side"><figure class="portrait"><img src="' + esc(E.photo) + '" alt="' + esc(t(LAB.photoAlt)) + '" loading="lazy"></figure>' +
+      '<div class="edu-grid"><figure class="schools-shot"><img src="' + esc(src(E.schoolsImage)) + '" alt="' + esc(t(LAB.schoolsAlt)) + '" loading="lazy"></figure>' +
+      '<div class="edu-side"><figure class="portrait"><img src="' + esc(src(E.photo)) + '" alt="' + esc(t(LAB.photoAlt)) + '" loading="lazy"></figure>' +
       '<div class="degrees">' + E.degrees.map(function (g) {
         return '<div class="degree"><h3>' + esc(t(g.school)) + "</h3><p>" + esc(t(g.degree)) + '</p><span class="dates">' + range(g.when) + "</span></div>";
       }).join("") + "</div></div></div></section>";
@@ -101,7 +107,7 @@
       R.gallery.map(function (g) {
         var cls = g.big ? " big" : "";
         return g.src
-          ? '<figure class="shot' + cls + '"><img src="' + esc(g.src) + '" alt="' + esc(t(g.caption)) + '" loading="lazy"><figcaption>' + esc(t(g.caption)) + "</figcaption></figure>"
+          ? '<figure class="shot' + cls + '"><img src="' + esc(src(g.src)) + '" alt="' + esc(t(g.caption)) + '" loading="lazy"><figcaption>' + esc(t(g.caption)) + "</figcaption></figure>"
           : '<div class="ph-img' + cls + '">' + IMG + "<span>" + esc(t(LAB.galleryTodo)) + "</span><span>" + esc(t(g.caption)) + "</span></div>";
       }).join("") + "</div></section>";
 
