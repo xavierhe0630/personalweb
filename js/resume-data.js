@@ -143,8 +143,7 @@
         ],
         preview: "projects/site-selection/preview.jpg",
         links: [
-          { href: "projects/site-selection/", label: L("Try the interactive demo", "试用交互演示"), primary: true },
-          { href: "https://alsds-team1-app-e3fed9azh2fpb4ej.eastus-01.azurewebsites.net/", label: L("Full app on Azure", "Azure 完整版") }
+          { href: "projects/site-selection/", label: L("Demo Present", "项目演示"), primary: true }
         ]
       }
     ],
