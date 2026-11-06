@@ -44,6 +44,24 @@
   function range(w) { return w ? d(w[0]) + " – " + d(w[1]) : ""; }
   var IMG = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="10" r="2"/><path d="M21 17l-5-5-9 8"/></svg>';
 
+  function link(l) {
+    var ext = /^https?:/.test(l.href);
+    return '<a class="proj-btn' + (l.primary ? " primary" : "") + '" href="' + esc(ext ? l.href : src(l.href)) + '"' +
+      (ext ? ' target="_blank" rel="noopener"' : "") + ">" + esc(t(l.label)) + (ext ? " ↗" : " →") + "</a>";
+  }
+  function showcase(x) {
+    if (!x.preview && !x.links) return "";
+    var main = (x.links || []).filter(function (l) { return l.primary; })[0] || (x.links || [])[0];
+    var h = '<div class="proj-show">';
+    if (x.preview) {
+      var ext = main && /^https?:/.test(main.href);
+      h += (main ? '<a class="proj-shot" href="' + esc(ext ? main.href : src(main.href)) + '"' + (ext ? ' target="_blank" rel="noopener"' : "") + ' aria-label="' + esc(t(main.label)) + '">' : '<div class="proj-shot">') +
+        '<img src="' + esc(src(x.preview)) + '" alt="" loading="lazy">' + (main ? "</a>" : "</div>");
+    }
+    if (x.links) h += '<div class="proj-links">' + x.links.map(link).join("") + "</div>";
+    return h + "</div>";
+  }
+
   function head(key) {
     return '<div class="sec-head"><h2>' + esc(t(LAB[key])) + "</h2></div>";
   }
@@ -54,7 +72,7 @@
         (x.where ? "<span>" + esc(t(x.where)) + "</span>" : "") +
         '</div><div class="what"><h3>' + esc(t(x.role)) + "</h3><ul>" +
         x.points.map(function (p) { return "<li>" + esc(t(p)) + "</li>"; }).join("") +
-        "</ul></div></article>";
+        "</ul>" + showcase(x) + "</div></article>";
     }).join("");
   }
 
@@ -121,7 +139,15 @@
       });
     });
     spy(root);
+    // 从其他页面带着 #project 这类锚点回来时，渲染完成后滚到对应板块
+    if (!rendered) {
+      rendered = true;
+      var id = (location.hash || "").slice(1);
+      var target = id && root.querySelector('[id="' + id.replace(/"/g, "") + '"]');
+      if (target) setTimeout(function () { target.scrollIntoView(); }, 0);
+    }
   }
+  var rendered = false;
 
   // 下滑时高亮当前所在的板块
   var observer = null;

@@ -99,6 +99,14 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .what ul{margin:0;padding-left:18px;font-size:16px;font-family:"Noto Sans SC",Archivo,sans-serif}
 .what li{margin:8px 0}
 .what li::marker{color:var(--sc,var(--c1))}
+.proj-show{margin-top:18px;display:flex;flex-direction:column;gap:12px;max-width:760px}
+.proj-shot{display:block;border:1px solid var(--line);border-radius:10px;overflow:hidden;background:var(--surface);transition:border-color .2s,transform .2s}
+.proj-shot img{width:100%;aspect-ratio:2/1;object-fit:cover;object-position:top left}
+a.proj-shot:hover{border-color:var(--sc,var(--c1));transform:translateY(-2px)}
+.proj-links{display:flex;flex-wrap:wrap;gap:8px}
+.proj-btn{font-size:14px;padding:7px 16px;border-radius:999px;border:1px solid var(--sc,var(--c1));color:var(--sc,var(--c1));text-decoration:none;font-family:Archivo,"Noto Sans SC",sans-serif}
+.proj-btn.primary{background:var(--sc,var(--c1));color:var(--on-accent)}
+.proj-btn:hover{opacity:.85}
 .edu-grid{display:grid;grid-template-columns:minmax(0,380px) minmax(0,1fr);gap:clamp(32px,4vw,64px);align-items:start}
 .schools-shot{margin:0;border:1px solid var(--line);border-radius:8px;overflow:hidden;background:var(--surface)}
 .schools-shot img{width:100%}
@@ -143,7 +151,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 @media print{
   @page{margin:14mm}
   body{background:#fff!important;color:#000}
-  .nav,body::before,.p1-jump-bar,.no-print,.schools-shot,.portrait,.about.ph{display:none!important}
+  .nav,body::before,.p1-jump-bar,.proj-show,.no-print,.schools-shot,.portrait,.about.ph{display:none!important}
   .p1-band{background:none;border:0}
   .p1-hero-grid{padding:0 0 12px;display:block}
   .p1-name{font-size:34px;line-height:1.1}

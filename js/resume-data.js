@@ -107,7 +107,27 @@
       ]
     },
 
+    // 项目：preview 是缩略图，links 是按钮（站内链接同页打开，外部链接新标签打开）
     project: [
+      {
+        org: L("Python (pandas, NumPy, SciPy), D3.js", "Python（pandas、NumPy、SciPy）、D3.js"),
+        role: L("U.S. Cancer Incidence & Mortality Forecasting, 2014–2030", "美国十大癌症发病率与死亡率预测（2014–2030）"),
+        points: [
+          L("Forecast age-adjusted incidence and mortality rates for the ten most common U.S. cancers through 2030 from SEER 2014–2023 data, with 95% prediction intervals.",
+            "基于 SEER 2014–2023 年数据，预测美国十大常见癌症到 2030 年的年龄标化发病率与死亡率，并给出 95% 预测区间。"),
+          L("Combined a log-linear trend model (with a 2020 indicator so the pandemic dip doesn’t bias the slope) and a damped-trend model (φ = 0.8) into an ensemble forecast.",
+            "将对数线性趋势模型（加入 2020 年指示变量，避免疫情导致的下降拉低趋势）与阻尼趋势模型（φ = 0.8）组合为集成预测。"),
+          L("Validated by refitting on 2014–2019 and scoring on 2021–2023: the ensemble cut mortality forecast error to 2.5% MAPE versus 5.0% for a no-change baseline, and matched the baseline for incidence.",
+            "用 2014–2019 年数据重新训练、在 2021–2023 年回测：死亡率预测误差（MAPE）为 2.5%，比“不变”基准的 5.0% 降低一半；发病率与基准持平。"),
+          L("Quantified the 2020 diagnosis gap at 4–14% below trend across sites, and built an interactive D3.js dashboard with a site explorer, ranking race, incidence-versus-mortality chart, and sortable summary table.",
+            "量化 2020 年的诊断缺口（各癌种比趋势低 4–14%），并用 D3.js 搭建交互看板，包含癌种浏览、排名变化动画、发病与死亡趋势对比图和可排序汇总表。")
+        ],
+        preview: "projects/cancer-forecast/preview.jpg",
+        links: [
+          { href: "projects/cancer-forecast/", label: L("View interactive dashboard", "查看交互看板"), primary: true },
+          { href: "https://github.com/xavierhe0630/personalweb/blob/main/projects/cancer-forecast/cancer_forecast_model.py", label: L("Model code", "模型代码") }
+        ]
+      },
       {
         org: L("Python, Flask, Azure SQL, Azure OpenAI, Leaflet, Chart.js", "Python, Flask, Azure SQL, Azure OpenAI, Leaflet, Chart.js"),
         role: L("Retail Site-Selection Decision Support", "零售选址决策支持系统"),

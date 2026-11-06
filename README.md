@@ -26,6 +26,7 @@ assets/schools.jpg    学校定位截图
 assets/Yixuan_CV.pdf  ← 简历 PDF（更新简历时替换同名文件）
 assets/pay-wechat.png ← 微信收款码（需要你放进来）
 assets/pay-alipay.png ← 支付宝收款码（需要你放进来）
+projects/cancer-forecast/  癌症预测看板（网址 /projects/cancer-forecast/）、缩略图 preview.jpg、模型代码
 apps-script/Code.gs   预约后台代码（贴到 Google Apps Script，不需要放进网站）
 ```
 
@@ -103,3 +104,9 @@ apps-script/Code.gs   预约后台代码（贴到 Google Apps Script，不需要
 - 加工作照：照片放进 `assets`，在 `js/resume-data.js` 最后的 `gallery` 里把对应的 `src: ""` 改成 `src: "assets/文件名.jpg"`。
 - 填 LinkedIn：`js/resume-data.js` 里的 `linkedin: ""`。
 - 其他页面的文字：在 `index.html` 里改。每段中文旁边的 `data-en="..."` 是对应的英文。
+
+## 五、添加新的项目展示
+
+1. 在 `projects` 下新建一个文件夹，比如 `projects/my-project/`，把项目网页命名为 `index.html` 放进去，再放一张缩略图 `preview.jpg`（宽高比约 2:1）。
+2. 在 `js/resume-data.js` 的 `project` 里照着癌症预测那一条加一项，填上 `preview` 和 `links`。
+3. 项目网页里的「返回简历」链接写 `../../resume/#project`。
