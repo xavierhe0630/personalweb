@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Yixuan He</title>
+<meta name="description" content="Yixuan He: resume, I Ching readings, tarot planning, and a space to talk.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>☯️</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;800&family=Cinzel:wght@500;700&family=Ma+Shan+Zheng&family=Noto+Sans+SC:wght@300;400;500;700&family=Noto+Serif+SC:wght@400;600;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/site.css">
+</head>
+<body data-page="resume">
+
+<nav class="nav" aria-label="Main">
+  <div class="nav-inner">
+    <a class="brand" href="#resume">Yixuan He</a>
+    <div class="tabs">
+      <a href="#resume" data-tab="resume" data-en="Resume">个人履历</a>
+      <a href="#yijing" data-tab="yijing" data-en="I Ching">易经问卜</a>
+      <a href="#tarot" data-tab="tarot" data-en="Tarot">塔罗梳理</a>
+      <a href="#listen" data-tab="listen" data-en="Talk">倾诉倾听</a>
+    </div>
+    <button type="button" class="nav-btn" data-lang-toggle>EN</button>
+  </div>
+</nav>
+
+<!-- ======================= 第一页 履历（内容在 js/resume-data.js） ======================= -->
+<main id="page-resume" class="page p1">
+  <div id="resume-root"></div>
+</main>
+
+<!-- ======================= 第二页 易经问卜 ======================= -->
+<main id="page-yijing" class="page p2">
+  <div class="wrap">
+    <header class="p2-hero">
+      <div>
+        <h1 class="p2-title" data-en="I Ching Readings">易经问卜</h1>
+        <p class="p2-sub" data-en="Read the image, weigh the words, and ask when to advance and when to wait.">观其象，玩其辞，问其进退</p>
+        <div class="seal" aria-hidden="true">问<br>卜</div>
+      </div>
+      <div class="taiji-wrap" aria-hidden="true">
+        <svg class="bagua-ring" viewBox="0 0 400 400">
+          <circle cx="200" cy="200" r="196" fill="none" stroke="currentColor" stroke-opacity=".25"/>
+          <circle cx="200" cy="200" r="132" fill="none" stroke="currentColor" stroke-opacity=".25"/>
+          <g id="trigs" fill="currentColor"></g>
+        </svg>
+        <svg class="taiji" viewBox="0 0 200 200">
+          <circle cx="100" cy="100" r="98" fill="var(--bg)" stroke="var(--ink)" stroke-width="2"/>
+          <path d="M100 2 A98 98 0 0 1 100 198 A49 49 0 0 1 100 100 A49 49 0 0 0 100 2Z" fill="var(--ink)"/>
+          <circle cx="100" cy="51" r="14" fill="var(--ink)"/>
+          <circle cx="100" cy="149" r="14" fill="var(--bg)"/>
+        </svg>
+      </div>
+      <div class="vert" aria-hidden="true">一阴一阳之谓道</div>
+      <svg class="mountains" viewBox="0 0 1200 300" preserveAspectRatio="none" aria-hidden="true">
+        <path d="M0 300 L0 190 C120 150 180 90 280 120 C360 145 400 70 500 80 C600 92 640 160 760 140 C860 122 900 60 1010 90 C1090 112 1140 150 1200 140 L1200 300Z" fill="var(--ink)" opacity=".07"/>
+        <path d="M0 300 L0 240 C140 210 220 170 330 200 C430 228 520 160 640 180 C760 200 830 250 950 220 C1050 196 1120 210 1200 230 L1200 300Z" fill="var(--ink)" opacity=".1"/>
+      </svg>
+    </header>
+
+    <section class="p2-sec">
+      <h2 data-en="About the readings">关于问卜</h2>
+      <p class="lead" data-en="Who taught you, how you came to the I Ching, and how you read hexagrams against real life.">这一部分介绍你的师承、学易经历，以及你如何看待卦象与人事。</p>
+      <div class="p2-about">
+        <div class="ph" data-en="To fill in: your background, the casting methods you use, and what you hope people take away.">待补充：你的学易背景、常用的起卦方法、你希望来问卜的人带走什么。</div>
+        <div class="ph-img"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="10" r="2"/><path d="M21 17l-5-5-9 8"/></svg><span data-en="Image: a Daoist-themed photo (landscape, temple, taiji, hand-copied texts)">图片位：道家文化相关图片（如山水、道观、太极图、手抄卦书）</span></div>
+      </div>
+    </section>
+
+    <section class="p2-sec">
+      <h2 data-en="The eight trigrams">八卦</h2>
+      <p class="lead" data-en="Fu Xi’s arrangement, one image each.">先天八卦，各取一象。</p>
+      <div class="trigrams">
+        <div class="tri"><span class="sym">☰</span><span class="nm">乾</span><span class="nt" data-en="Heaven">天</span></div>
+        <div class="tri"><span class="sym">☱</span><span class="nm">兑</span><span class="nt" data-en="Lake">泽</span></div>
+        <div class="tri"><span class="sym">☲</span><span class="nm">离</span><span class="nt" data-en="Fire">火</span></div>
+        <div class="tri"><span class="sym">☳</span><span class="nm">震</span><span class="nt" data-en="Thunder">雷</span></div>
+        <div class="tri"><span class="sym">☴</span><span class="nm">巽</span><span class="nt" data-en="Wind">风</span></div>
+        <div class="tri"><span class="sym">☵</span><span class="nm">坎</span><span class="nt" data-en="Water">水</span></div>
+        <div class="tri"><span class="sym">☶</span><span class="nm">艮</span><span class="nt" data-en="Mountain">山</span></div>
+        <div class="tri"><span class="sym">☷</span><span class="nm">坤</span><span class="nt" data-en="Earth">地</span></div>
+      </div>
+    </section>
+
+    <section class="p2-sec">
+      <h2 data-en="Methods">问卜方式</h2>
+      <p class="lead" data-en="To be decided. Three slots for now.">具体方式待定，先留三个位置。</p>
+      <div class="svc">
+        <div class="ph"><svg class="hx" viewBox="0 0 44 44" aria-hidden="true" fill="var(--accent)"><rect x="4" y="4.0" width="36" height="3.6"/><rect x="4" y="10.6" width="36" height="3.6"/><rect x="4" y="17.2" width="36" height="3.6"/><rect x="4" y="23.8" width="36" height="3.6"/><rect x="4" y="30.4" width="36" height="3.6"/><rect x="4" y="37.0" width="36" height="3.6"/></svg><h3 data-en="Method one (TBD)">方式一（待定）</h3><span data-en="For example: Six Lines, one hexagram per question">例如：六爻问事，一事一卦</span></div>
+        <div class="ph"><svg class="hx" viewBox="0 0 44 44" aria-hidden="true" fill="var(--accent)"><rect x="4" y="4.0" width="15" height="3.6"/><rect x="25" y="4.0" width="15" height="3.6"/><rect x="4" y="10.6" width="15" height="3.6"/><rect x="25" y="10.6" width="15" height="3.6"/><rect x="4" y="17.2" width="15" height="3.6"/><rect x="25" y="17.2" width="15" height="3.6"/><rect x="4" y="23.8" width="36" height="3.6"/><rect x="4" y="30.4" width="36" height="3.6"/><rect x="4" y="37.0" width="36" height="3.6"/></svg><h3 data-en="Method two (TBD)">方式二（待定）</h3><span data-en="For example: Plum Blossom, cast from time or numbers">例如：梅花易数，以时、以数起卦</span></div>
+        <div class="ph"><svg class="hx" viewBox="0 0 44 44" aria-hidden="true" fill="var(--accent)"><rect x="4" y="4.0" width="15" height="3.6"/><rect x="25" y="4.0" width="15" height="3.6"/><rect x="4" y="10.6" width="36" height="3.6"/><rect x="4" y="17.2" width="15" height="3.6"/><rect x="25" y="17.2" width="15" height="3.6"/><rect x="4" y="23.8" width="36" height="3.6"/><rect x="4" y="30.4" width="15" height="3.6"/><rect x="25" y="30.4" width="15" height="3.6"/><rect x="4" y="37.0" width="36" height="3.6"/></svg><h3 data-en="Method three (TBD)">方式三（待定）</h3><span data-en="For example: choosing dates, yearly outlook">例如：择日、年运</span></div>
+      </div>
+    </section>
+
+    <section class="p2-sec">
+      <h2 data-en="How it works">问卜流程</h2>
+      <p class="lead" data-en="Adjust these steps to your own practice.">流程可按你的习惯调整。</p>
+      <ol class="steps">
+        <li><div class="n">一</div><h3 data-en="Book">预约</h3><p data-en="Pick a service and time below">在下方选择项目与时间</p></li>
+        <li><div class="n">二</div><h3 data-en="Ask">说明所问</h3><p data-en="One question at a time, with context">一次只问一件事，说清背景</p></li>
+        <li><div class="n">三</div><h3 data-en="Cast">起卦</h3><p data-en="Method to be decided">方式待定</p></li>
+        <li><div class="n">四</div><h3 data-en="Interpret">解卦</h3><p data-en="The hexagram, its lines, and what to do">讲解卦象、爻辞与建议</p></li>
+        <li><div class="n">五</div><h3 data-en="Follow up">回访</h3><p data-en="Optional, to be decided">可选，待定</p></li>
+      </ol>
+    </section>
+
+    <section class="p2-sec">
+      <h2 data-en="Gallery">图录</h2>
+      <p class="lead" data-en="For your Daoist-themed images or photos from readings.">留给你的道家文化图片或问卜现场照片。</p>
+      <div class="p2-imgs">
+        <div class="ph-img"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="10" r="2"/><path d="M21 17l-5-5-9 8"/></svg><span data-en="Large image">大图位</span></div>
+        <div class="ph-img"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="10" r="2"/><path d="M21 17l-5-5-9 8"/></svg><span data-en="Image">图片位</span></div>
+        <div class="ph-img"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="10" r="2"/><path d="M21 17l-5-5-9 8"/></svg><span data-en="Image">图片位</span></div>
+      </div>
+    </section>
+
+    <section class="p2-sec" id="book-yijing">
+      <h2 data-en="Book a reading">预约</h2>
+      <p class="lead" data-en="Choose I Ching, tarot, or both in one session.">可以单独约易经问卜、塔罗梳理，或两者一起。</p>
+      <div data-booking data-default="yijing"></div>
+      <p class="disclaimer" data-en="Readings are for reflection only and are not medical, legal, financial, or other professional advice.">问卜结果仅供参考与自我思考，不构成医疗、法律、投资或其他专业建议。</p>
+    </section>
+  </div>
+</main>
+
+<!-- ======================= 第三页 塔罗 ======================= -->
+<main id="page-tarot" class="page p3">
+  <div class="wrap">
+    <header class="p3-hero">
+      <h1><small>Tarot</small><span data-en="Lay your thinking out on the table">用塔罗，把思路摊开</span></h1>
+      <p data-en="I won’t predict your future. The cards help untangle your thoughts one by one, so you can see where you are, what’s in the way, and what to do next.">不替你预言结果，而是借牌面把纠缠的想法一张张摆出来，看清现在、卡点和下一步。</p>
+      <div class="spread">
+        <button type="button" class="card" aria-label="翻开第一张：现状" data-en-label="Turn over card one: where you are"><div class="face back"><svg viewBox="0 0 70 120" aria-hidden="true"><rect x="4" y="4" width="62" height="112" rx="5" fill="none" stroke="#c9a961" stroke-opacity=".7"/><rect x="8" y="8" width="54" height="104" rx="3" fill="none" stroke="#c9a961" stroke-opacity=".35"/><circle cx="35" cy="60" r="16" fill="none" stroke="#c9a961"/><path d="M41 49a12 12 0 1 0 0 22a14 14 0 0 1 0-22z" fill="#c9a961"/><g stroke="#c9a961" stroke-width=".8"><line x1="35" y1="60" x2="35" y2="36" transform="rotate(0 35 60)" stroke-dasharray="0 22 2 0"/><line x1="35" y1="60" x2="35" y2="36" transform="rotate(30 35 60)" stroke-dasharray="0 22 2 0"/><line x1="35" y1="60" x2="35" y2="36" transform="rotate(60 35 60)" stroke-dasharray="0 22 2 0"/><line x1="35" y1="60" x2="35" y2="36" transform="rotate(90 35 60)" stroke-dasharray="0 22 2 0"/><line x1="35" y1="60" x2="35" y2="36" transform="rotate(120 35 60)" stroke-dasharray="0 22 2 0"/><line x1="35" y1="60" x2="35" y2="36" transform="rotate(150 35 60)" stroke-dasharray="0 22 2 0"/><line x1="35" y1="60" x2="35" y2="36" transform="rotate(180 35 60)" stroke-dasharray="0 22 2 0"/><line x1="35" y1="60" x2="35" y2="36" transform="rotate(210 35 60)" stroke-dasharray="0 22 2 0"/><line x1="35" y1="60" x2="35" y2="36" transform="rotate(240 35 60)" stroke-dasharray="0 22 2 0"/><line x1="35" y1="60" x2="35" y2="36" transform="rotate(270 35 60)" stroke-dasharray="0 22 2 0"/><line x1="35" y1="60" x2="35" y2="36" transform="rotate(300 35 60)" stroke-dasharray="0 22 2 0"/><line x1="35" y1="60" x2="35" y2="36" transform="rotate(330 35 60)" stroke-dasharray="0 22 2 0"/></g><path d="M35 18l2 5 5 .5-4 3 1.5 5-4.5-3-4.5 3 1.5-5-4-3 5-.5z" fill="#c9a961" transform="scale(.7) translate(15 6)"/><path d="M35 18l2 5 5 .5-4 3 1.5 5-4.5-3-4.5 3 1.5-5-4-3 5-.5z" fill="#c9a961" transform="scale(.7) translate(15 128)"/></svg></div><div class="face front"><span class="roman">I</span><b data-en="Where you are">现状</b><span data-en="Your starting point">你此刻站在哪里</span></div></button>
+        <button type="button" class="card" aria-label="翻开第二张：卡点" data-en-label="Turn over card two: what’s in the way"><div class="face back"><svg viewBox="0 0 70 120" aria-hidden="true"><rect x="4" y="4" width="62" height="112" rx="5" fill="none" stroke="#c9a961" stroke-opacity=".7"/><rect x="8" y="8" width="54" height="104" rx="3" fill="none" stroke="#c9a961" stroke-opacity=".35"/><circle cx="35" cy="60" r="16" fill="none" stroke="#c9a961"/><path d="M41 49a12 12 0 1 0 0 22a14 14 0 0 1 0-22z" fill="#c9a961"/><g stroke="#c9a961" stroke-width=".8"><line x1="35" y1="60" x2="35" y2="36" transform="rotate(0 35 60)" stroke-dasharray="0 22 2 0"/><line x1="35" y1="60" x2="35" y2="36" transform="rotate(30 35 60)" stroke-dasharray="0 22 2 0"/><line x1="35" y1="60" x2="35" y2="36" transform="rotate(60 35 60)" stroke-dasharray="0 22 2 0"/><line x1="35" y1="60" x2="35" y2="36" transform="rotate(90 35 60)" stroke-dasharray="0 22 2 0"/><line x1="35" y1="60" x2="35" y2="36" transform="rotate(120 35 60)" stroke-dasharray="0 22 2 0"/><line x1="35" y1="60" x2="35" y2="36" transform="rotate(150 35 60)" stroke-dasharray="0 22 2 0"/><line x1="35" y1="60" x2="35" y2="36" transform="rotate(180 35 60)" stroke-dasharray="0 22 2 0"/><line x1="35" y1="60" x2="35" y2="36" transform="rotate(210 35 60)" stroke-dasharray="0 22 2 0"/><line x1="35" y1="60" x2="35" y2="36" transform="rotate(240 35 60)" stroke-dasharray="0 22 2 0"/><line x1="35" y1="60" x2="35" y2="36" transform="rotate(270 35 60)" stroke-dasharray="0 22 2 0"/><line x1="35" y1="60" x2="35" y2="36" transform="rotate(300 35 60)" stroke-dasharray="0 22 2 0"/><line x1="35" y1="60" x2="35" y2="36" transform="rotate(330 35 60)" stroke-dasharray="0 22 2 0"/></g><path d="M35 18l2 5 5 .5-4 3 1.5 5-4.5-3-4.5 3 1.5-5-4-3 5-.5z" fill="#c9a961" transform="scale(.7) translate(15 6)"/><path d="M35 18l2 5 5 .5-4 3 1.5 5-4.5-3-4.5 3 1.5-5-4-3 5-.5z" fill="#c9a961" transform="scale(.7) translate(15 128)"/></svg></div><div class="face front"><span class="roman">II</span><b data-en="What’s in the way">卡点</b><span data-en="What keeps you stuck">是什么让你停住</span></div></button>
+        <button type="button" class="card" aria-label="翻开第三张：下一步" data-en-label="Turn over card three: next step"><div class="face back"><svg viewBox="0 0 70 120" aria-hidden="true"><rect x="4" y="4" width="62" height="112" rx="5" fill="none" stroke="#c9a961" stroke-opacity=".7"/><rect x="8" y="8" width="54" height="104" rx="3" fill="none" stroke="#c9a961" stroke-opacity=".35"/><circle cx="35" cy="60" r="16" fill="none" stroke="#c9a961"/><path d="M41 49a12 12 0 1 0 0 22a14 14 0 0 1 0-22z" fill="#c9a961"/><g stroke="#c9a961" stroke-width=".8"><line x1="35" y1="60" x2="35" y2="36" transform="rotate(0 35 60)" stroke-dasharray="0 22 2 0"/><line x1="35" y1="60" x2="35" y2="36" transform="rotate(30 35 60)" stroke-dasharray="0 22 2 0"/><line x1="35" y1="60" x2="35" y2="36" transform="rotate(60 35 60)" stroke-dasharray="0 22 2 0"/><line x1="35" y1="60" x2="35" y2="36" transform="rotate(90 35 60)" stroke-dasharray="0 22 2 0"/><line x1="35" y1="60" x2="35" y2="36" transform="rotate(120 35 60)" stroke-dasharray="0 22 2 0"/><line x1="35" y1="60" x2="35" y2="36" transform="rotate(150 35 60)" stroke-dasharray="0 22 2 0"/><line x1="35" y1="60" x2="35" y2="36" transform="rotate(180 35 60)" stroke-dasharray="0 22 2 0"/><line x1="35" y1="60" x2="35" y2="36" transform="rotate(210 35 60)" stroke-dasharray="0 22 2 0"/><line x1="35" y1="60" x2="35" y2="36" transform="rotate(240 35 60)" stroke-dasharray="0 22 2 0"/><line x1="35" y1="60" x2="35" y2="36" transform="rotate(270 35 60)" stroke-dasharray="0 22 2 0"/><line x1="35" y1="60" x2="35" y2="36" transform="rotate(300 35 60)" stroke-dasharray="0 22 2 0"/><line x1="35" y1="60" x2="35" y2="36" transform="rotate(330 35 60)" stroke-dasharray="0 22 2 0"/></g><path d="M35 18l2 5 5 .5-4 3 1.5 5-4.5-3-4.5 3 1.5-5-4-3 5-.5z" fill="#c9a961" transform="scale(.7) translate(15 6)"/><path d="M35 18l2 5 5 .5-4 3 1.5 5-4.5-3-4.5 3 1.5-5-4-3 5-.5z" fill="#c9a961" transform="scale(.7) translate(15 128)"/></svg></div><div class="face front"><span class="roman">III</span><b data-en="Next step">下一步</b><span data-en="One thing to do first">可以先做的一件事</span></div></button>
+      </div>
+      <p class="hint" data-en="Tap a card to turn it over">点一下牌，翻开看看</p>
+    </header>
+
+    <section class="p3-sec">
+      <h2 data-en="Good questions to bring">适合带来的问题</h2>
+      <p class="lead" data-en="Service details to come. Three kinds of questions, for now.">具体服务说明待补充，以下按“思路梳理与规划”先拟三类。</p>
+      <div class="topics">
+        <div class="topic"><div class="glyph">☾</div><h3 data-en="Too many thoughts">想法太多，理不清</h3><p data-en="Put every loose thread on the table and sort facts from worries.">把脑子里的线头逐一摆上桌，分清哪些是事实、哪些是担心。</p></div>
+        <div class="topic"><div class="glyph">✧</div><h3 data-en="At a crossroads">站在岔路口</h3><p data-en="Between two or more options, see what you really care about on each path.">两个或多个选项之间，看清每条路你真正在意的是什么。</p></div>
+        <div class="topic"><div class="glyph">☉</div><h3 data-en="A goal without a plan">有目标，缺计划</h3><p data-en="Break a big goal into stages and find the step to take first.">把一个大目标拆成阶段，找出眼下最该先动的那一步。</p></div>
+      </div>
+    </section>
+
+    <section class="p3-sec">
+      <h2 data-en="Spreads">牌阵</h2>
+      <p class="lead" data-en="Names and uses to be added.">牌阵名称与用途待补充。</p>
+      <div class="spreads">
+        <div class="ph"><h3 data-en="Three cards">三张牌</h3><div class="mini"><i></i><i></i><i></i></div><span data-en="Where you are, what’s in the way, next step">现状、卡点、下一步</span></div>
+        <div class="ph"><h3 data-en="Spread two (TBD)">牌阵二（待定）</h3><div class="mini"><i></i><i></i><i></i><i></i><i></i></div><span data-en="For example: comparing options">例如：决策对比牌阵</span></div>
+        <div class="ph"><h3 data-en="Spread three (TBD)">牌阵三（待定）</h3><div class="mini"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><span data-en="For example: quarterly or yearly planning">例如：季度 / 年度规划牌阵</span></div>
+      </div>
+    </section>
+
+    <section class="p3-sec">
+      <h2 data-en="How a reading works">一次解读怎么进行</h2>
+      <p class="lead" data-en="Adjust these steps to your own practice.">流程可按你的习惯调整。</p>
+      <ol class="p3-steps">
+        <li><h3 data-en="Name the question">说出问题</h3><p data-en="Say in a sentence or two what you want to sort out">用一两句话讲清你想梳理的事</p></li>
+        <li><h3 data-en="Choose a spread">选择牌阵</h3><p data-en="Matched to your question">根据问题选合适的牌阵</p></li>
+        <li><h3 data-en="Draw and read">抽牌解读</h3><p data-en="Card by card, checked against your real situation">逐张讲解，并和你的实际情况对照</p></li>
+        <li><h3 data-en="Turn it into a plan">整理成计划</h3><p data-en="A few concrete steps (format to be decided)">把结论写成可执行的几步（形式待定）</p></li>
+      </ol>
+    </section>
+
+    <section class="p3-sec">
+      <h2 data-en="Cards and sessions">牌面与现场</h2>
+      <p class="lead" data-en="For photos of your decks or sessions.">留给你的牌组照片或解读现场照片。</p>
+      <div class="p3-imgs">
+        <div class="ph-img"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="10" r="2"/><path d="M21 17l-5-5-9 8"/></svg><span data-en="Image">图片位</span></div>
+        <div class="ph-img"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="10" r="2"/><path d="M21 17l-5-5-9 8"/></svg><span data-en="Image">图片位</span></div>
+        <div class="ph-img"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="10" r="2"/><path d="M21 17l-5-5-9 8"/></svg><span data-en="Image">图片位</span></div>
+        <div class="ph-img"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="10" r="2"/><path d="M21 17l-5-5-9 8"/></svg><span data-en="Image">图片位</span></div>
+      </div>
+    </section>
+
+    <section class="p3-sec" id="book-tarot">
+      <h2 data-en="Book a reading">预约</h2>
+      <p class="lead" data-en="Choose tarot, I Ching, or both in one session.">可以单独约塔罗梳理、易经问卜，或两者一起。</p>
+      <div data-booking data-default="tarot"></div>
+    </section>
+  </div>
+</main>
+
+<!-- ======================= 第四页 倾诉倾听 ======================= -->
+<main id="page-listen" class="page p4">
+  <div class="wrap">
+    <header class="p4-hero">
+      <div>
+        <h1 data-en="Here, you can<br>slow down.">在这里，<br>你可以慢一点。</h1>
+        <p data-en="Talk about what’s been weighing on you. No rush to find answers. First, be heard.">说说最近压在心上的事。不急着找答案，先被好好听见。</p>
+      </div>
+      <div class="breath">
+        <div class="orb" id="orb"><span id="orbText">准备好了吗</span></div>
+        <button type="button" id="breathBtn">开始一次呼吸练习</button>
+      </div>
+    </header>
+
+    <aside class="notice">
+      <h2 data-en="What this space is">关于这里</h2>
+      <p data-en="I’m studying and preparing for professional certification, and I’m not licensed yet. What I offer is a space to talk and be listened to. It isn’t counseling, therapy, or medical diagnosis. If you need professional care, I can help you look for a licensed provider.">我目前正在系统学习并备考相关资质，尚未取得执照。这里提供的是倾诉与倾听陪伴，不是心理咨询、心理治疗或医学诊断。如果你需要专业帮助，我可以协助你寻找持证的专业人士。</p>
+    </aside>
+
+    <section class="p4-sec">
+      <h2 data-en="About me">关于我</h2>
+      <p class="lead" data-en="People coming for the first time want to know who you are and what you’re learning.">第一次来的人，最想先知道你是谁、正在学什么。</p>
+      <div class="p4-me">
+        <div class="ph-img"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="10" r="2"/><path d="M21 17l-5-5-9 8"/></svg><span data-en="Portrait">头像位</span></div>
+        <div class="ph" data-en="To fill in: what you’re studying, the certification you’re preparing for, your experience accompanying people (Hebrew SeniorLife, Haven Hospice), and that you speak Chinese and English.">待补充：你正在学习的方向和备考的资质、你的陪伴经验（如 Hebrew SeniorLife 和 Haven Hospice），以及中英双语。</div>
+      </div>
+    </section>
+
+    <section class="p4-sec">
+      <h2 data-en="What we can talk about">可以聊些什么</h2>
+      <p class="lead" data-en="Drafted from your experience; confirm or change.">方向待你确认，以下是根据你的经历先拟的几项。</p>
+      <div class="chips">
+        <div class="chip"><h3 data-en="Stress and mood">压力与情绪</h3><p data-en="Worry, feeling low, poor sleep, no energy">焦虑、低落、睡不好、提不起劲</p></div>
+        <div class="chip"><h3 data-en="School and career">学业与职业</h3><p data-en="Job-search doubts, choosing a direction, adjusting at work">求职迷茫、方向选择、职场适应</p></div>
+        <div class="chip"><h3 data-en="Studying abroad">留学与跨文化适应</h3><p data-en="Loneliness, identity, culture shock">孤独感、身份感、文化冲击</p></div>
+        <div class="chip"><h3 data-en="Relationships">关系</h3><p data-en="Family, partners, friends and coworkers">家庭、亲密关系、人际相处</p></div>
+        <div class="chip"><h3 data-en="Life changes">人生转折</h3><p data-en="Graduating, moving, loss and goodbyes">毕业、搬家、失去与告别</p></div>
+      </div>
+    </section>
+
+    <section class="p4-sec">
+      <h2 data-en="Format">倾诉形式</h2>
+      <p class="lead" data-en="Format, length, and price to be added.">形式、时长与费用待补充。</p>
+      <div class="fmt">
+        <div class="ph"><h3 data-en="Online">线上</h3><span data-en="Platform, length, price to be added">平台、时长、费用待补充</span></div>
+        <div class="ph"><h3 data-en="In person">线下</h3><span data-en="Location, length, price to be added">地点、时长、费用待补充</span></div>
+        <div class="ph"><h3 data-en="First chat">初次沟通</h3><span data-en="For example: a free 15-minute intro (TBD)">例如：15 分钟免费了解（待定）</span></div>
+      </div>
+    </section>
+
+    <section class="p4-sec">
+      <h2 data-en="Privacy and safety">保密与安全</h2>
+      <p class="lead" data-en="Final wording to be confirmed.">具体条款待你确认。</p>
+      <div class="care">
+        <div><h3 data-en="Privacy">保密原则</h3><ul>
+          <li data-en="What you share stays between us.">你说的话我会保密。</li>
+          <li data-en="The exception: if you or someone else is at serious risk of harm, I’ll take the steps needed to keep people safe.">例外：当你或他人面临严重伤害风险时，我会采取必要的保护措施。</li></ul></div>
+        <div class="crisis"><h3 data-en="If you’re struggling right now">如果你现在很难受</h3>
+          <p data-en="This isn’t an emergency service. If you’re thinking about harming yourself or are in danger, get help now: in the US, call or text <strong>988</strong> (Suicide &amp; Crisis Lifeline), or call <strong>911</strong> in an emergency.">这里不是紧急服务。如果你有伤害自己的念头或正处于危险中，请立即寻求帮助：在美国可拨打或发短信至 <strong>988</strong>（自杀与危机生命线），紧急情况请拨 <strong>911</strong>。</p></div>
+      </div>
+    </section>
+
+    <section class="p4-sec" style="text-align:center">
+      <h2 data-en="Get in touch">联系我</h2>
+      <p class="lead" style="margin-inline:auto" data-en="How to book is still to be decided.">预约方式待定。</p>
+      <button type="button" class="btn" data-todo data-en="Book a time to talk">预约倾诉</button>
+    </section>
+  </div>
+</main>
+
+<script src="js/config.js"></script>
+<script src="js/i18n.js"></script>
+<script src="js/resume-data.js"></script>
+<script src="js/resume.js"></script>
+<script src="js/booking.js"></script>
+<script src="js/site.js"></script>
+</body>
+</html>

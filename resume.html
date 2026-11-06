@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Yixuan He | Resume</title>
+<meta name="description" content="Yixuan He: M.S. Analytics at Northeastern University. Data analysis, SQL, Python, Tableau.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📄</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;800&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/site.css">
+</head>
+<body data-page="resume" class="standalone">
+<nav class="nav" aria-label="Resume">
+  <div class="nav-inner">
+    <span class="brand">Yixuan He</span>
+    <span class="spacer"></span>
+    <a class="nav-btn" id="cvDownload" href="assets/Yixuan_CV.pdf" download="Yixuan_CV.pdf" data-en="Download CV">下载简历</a>
+    <button type="button" class="nav-btn" data-lang-toggle>EN</button>
+  </div>
+</nav>
+<main class="page active p1">
+  <div id="resume-root"></div>
+</main>
+<script src="js/i18n.js"></script>
+<script src="js/resume-data.js"></script>
+<script src="js/resume.js"></script>
+<script>
+/* 简历下载：普通网站直接下载简历文件；在 claude.ai 预览里改用预览环境的下载功能 */
+(function () {
+  var a = document.getElementById("cvDownload");
+  a.addEventListener("click", function (e) {
+    if (!window.claude || !window.claude.use) return;
+    e.preventDefault();
+    window.claude.use("downloads").then(function (dl) {
+      if (!dl) return;
+      var href = a.getAttribute("href"), get;
+      if (href.indexOf("data:") === 0) {
+        var bin = atob(href.split(",")[1]), bytes = new Uint8Array(bin.length);
+        for (var i = 0; i < bin.length; i++) bytes[i] = bin.charCodeAt(i);
+        get = Promise.resolve(bytes);
+      } else {
+        get = fetch(href).then(function (r) { return r.arrayBuffer(); });
+      }
+      return get.then(function (data) { return dl.save({ filename: "Yixuan_CV.pdf", data: data }); });
+    }).catch(function () {});
+  });
+})();
+</script>
+</body>
+</html>
