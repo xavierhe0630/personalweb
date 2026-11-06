@@ -1,6 +1,6 @@
 # Yixuan He 个人网站
 
-##https://xavierhe0630.github.io/resume/#resume
+## https://xavierhe0630.github.io/resume/#resume
 
 
 两个页面：
