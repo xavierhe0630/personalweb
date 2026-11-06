@@ -1,5 +1,8 @@
 # Yixuan He 个人网站
 
+##https://xavierhe0630.github.io/resume/#resume
+
+
 两个页面：
 
 - `index.html`：主站，四个页面（个人履历 / 易经问卜 / 塔罗梳理 / 倾诉倾听），带中英切换和预约系统
