@@ -26,6 +26,7 @@ assets/schools.jpg    学校定位截图
 assets/Yixuan_CV.pdf  ← 简历 PDF（更新简历时替换同名文件）
 assets/pay-wechat.png ← 微信收款码（需要你放进来）
 assets/pay-alipay.png ← 支付宝收款码（需要你放进来）
+projects/site-selection/   零售选址交互演示（网址 /projects/site-selection/），数据已内嵌在网页里
 projects/cancer-forecast/  癌症预测看板（网址 /projects/cancer-forecast/）、缩略图 preview.jpg、模型代码
 apps-script/Code.gs   预约后台代码（贴到 Google Apps Script，不需要放进网站）
 ```

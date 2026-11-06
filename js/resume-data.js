@@ -140,6 +140,11 @@
             "开发竞品情报功能，在交互式 Leaflet 地图上展示 3 英里内竞品门店的距离、规模与客流，并配合 Chart.js 结果看板。"),
           L("Implemented tiered confidence labels and precision guardrails; supported continuous deployment to Azure App Service via GitHub Actions.",
             "设置分级置信度标签与精度护栏，保证预测可信；通过 GitHub Actions 持续部署到 Azure App Service。")
+        ],
+        preview: "projects/site-selection/preview.jpg",
+        links: [
+          { href: "projects/site-selection/", label: L("Try the interactive demo", "试用交互演示"), primary: true },
+          { href: "https://alsds-team1-app-e3fed9azh2fpb4ej.eastus-01.azurewebsites.net/", label: L("Full app on Azure", "Azure 完整版") }
         ]
       }
     ],
