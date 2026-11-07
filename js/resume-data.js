@@ -124,8 +124,7 @@
         ],
         preview: "projects/cancer-forecast/preview.jpg",
         links: [
-          { href: "projects/cancer-forecast/", label: L("View interactive dashboard", "查看交互看板"), primary: true },
-          { href: "https://github.com/xavierhe0630/personalweb/blob/main/projects/cancer-forecast/cancer_forecast_model.py", label: L("Model code", "模型代码") }
+          { href: "projects/cancer-forecast/", label: L("View interactive dashboard", "查看交互看板"), primary: true }
         ]
       },
       {
