@@ -347,10 +347,23 @@ html[data-lang="en"] .p3-hero h1{font-size:clamp(36px,5.5vw,64px)}
 .bk-chip small{display:block;font-size:11px;color:var(--muted)}
 .bk-chip[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--on-accent)}
 .bk-chip[aria-pressed="true"] small{color:inherit;opacity:.8}
-.bk-time{min-width:84px;text-align:center}
+/* 时间按钮：两行分开，标签对齐 */
+.bk-time{min-width:200px;text-align:left;border-radius:12px;padding:10px 14px;display:flex;flex-direction:column;gap:6px}
+.bk-trow{display:grid;grid-template-columns:5.6em auto auto;align-items:baseline;gap:8px}
+.bk-tlab{font-size:12px;opacity:.7}
+.bk-tval{font-size:15px;font-weight:500;font-variant-numeric:tabular-nums;white-space:nowrap}
+.bk-tday{font-size:12px;opacity:.7;white-space:nowrap}
+/* 摘要：上面一行项目和价格，下面两行时间 */
+.bk-sum{display:flex;flex-direction:column;gap:12px;padding:14px 18px;border-radius:10px;background:var(--bg);margin-bottom:16px;font-size:14px}
+.bk-sum-head{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 16px}
+.bk-sum-svc{font-size:16px;font-weight:600}
+.bk-sum-head b{margin-left:auto;font-size:16px}
+.bk-when{display:grid;grid-template-columns:max-content max-content max-content max-content;gap:8px 12px;padding-top:12px;border-top:1px solid var(--line);font-size:15px;font-variant-numeric:tabular-nums}
+.bk-when-line{display:contents}
+.bk-wl{color:var(--muted);font-weight:500}
+.bk-wdash{color:var(--muted)}
+.bk-wc{font-weight:600;padding-left:12px}
 .bk-note{font-size:12px;color:var(--muted);margin:10px 0 0}
-.bk-sum{display:flex;flex-wrap:wrap;gap:6px 18px;padding:12px 16px;border-radius:8px;background:var(--bg);margin-bottom:16px;font-size:14px}
-.bk-sum b{margin-left:auto}
 .bk-field{display:flex;flex-direction:column;gap:4px;margin-bottom:14px;font-size:13px;color:var(--muted)}
 .bk-field input,.bk-field select,.bk-field textarea{font-size:15px;padding:10px 12px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--ink);width:100%}
 .bk-field input:focus,.bk-field select:focus,.bk-field textarea:focus{outline:2px solid var(--accent);outline-offset:0;border-color:transparent}
@@ -359,6 +372,7 @@ html[data-lang="en"] .p3-hero h1{font-size:clamp(36px,5.5vw,64px)}
 .bk-pay{border:0;padding:0;flex-direction:row;flex-wrap:wrap;gap:8px 20px}
 .bk-pay legend{padding:0;margin-bottom:6px;width:100%}
 .bk-pay label{display:flex;align-items:center;gap:6px;font-size:15px;color:var(--ink);cursor:pointer}
+.bk-pay input[type="radio"]{width:auto;padding:0;margin:0}
 .bk-pay small{color:var(--muted)}
 .bk-err{color:var(--accent);font-size:14px;margin:0 0 12px}
 .bk-submit{background:var(--accent);color:var(--on-accent);border:0;border-radius:8px;padding:12px 28px;font-size:15px;cursor:pointer}
@@ -377,4 +391,4 @@ html[data-lang="en"] .p3-hero h1{font-size:clamp(36px,5.5vw,64px)}
 .bk-dl dt{color:var(--muted)}
 .bk-dl dd{margin:0}
 .bk-done .bk-note{margin:16px 0}
-@media (max-width:700px){.bk{padding:18px}.bk-svcs{grid-template-columns:1fr}.bk-row{grid-template-columns:1fr;gap:0}.bk-sum b{margin-left:0;width:100%}}
+@media (max-width:700px){.bk{padding:18px}.bk-svcs{grid-template-columns:1fr}.bk-row{grid-template-columns:1fr;gap:0}.bk-sum-head b{margin-left:0;width:100%}.bk-when{grid-template-columns:max-content max-content 1fr;font-size:14px}.bk-wc{grid-column:3;padding-left:0}}
