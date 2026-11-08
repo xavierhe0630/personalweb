@@ -13,7 +13,7 @@
     skills: { en: "Skills", zh: "技能与语言" },
     certs: { en: "Certifications", zh: "证书" },
     gallery: { en: "Gallery", zh: "工作与活动照片" },
-    schoolsAlt: { en: "Map locations of the schools I attended", zh: "我就读过的学校定位" },
+    mapAlt: { en: "Map location of", zh: "地图定位：" },
     photoAlt: { en: "Portrait of Yixuan He", zh: "Yixuan He 个人照片" },
     linkedinTodo: { en: "LinkedIn (to add)", zh: "LinkedIn（待补充）" },
     galleryTodo: { en: "Photo slot", zh: "照片位" }
@@ -99,11 +99,13 @@
 
     var E = R.education;
     h += '<section class="sec c2" id="education">' + head("education") +
-      '<div class="edu-grid"><figure class="schools-shot"><img src="' + esc(src(E.schoolsImage)) + '" alt="' + esc(t(LAB.schoolsAlt)) + '" loading="lazy"></figure>' +
-      '<div class="edu-side"><div class="degrees">' + E.degrees.map(function (g) {
-        return '<div class="degree"><h3>' + esc(t(g.school)) + "</h3><p>" + esc(t(g.degree)) + '</p><span class="dates">' + range(g.when) + "</span></div>";
-      }).join("") + '</div><figure class="portrait"><img src="' + esc(src(E.photo)) + '" alt="' + esc(t(LAB.photoAlt)) + '" loading="lazy"></figure>' +
-      "</div></div></section>";
+      '<div class="edu-grid"><ol class="schools">' + E.schools.map(function (s) {
+        return '<li class="school"><div class="school-text"><h3>' + esc(t(s.school)) + "</h3><p>" + esc(t(s.degree)) + "</p>" +
+          (s.when ? '<span class="dates">' + range(s.when) + "</span>" : "") + "</div>" +
+          (s.map ? '<div class="school-map"><img src="' + esc(src(s.map)) + '" alt="' + esc(t(LAB.mapAlt)) + " " + esc(t(s.school)) + '" loading="lazy"></div>' : "") + "</li>";
+      }).join("") + "</ol>" +
+      '<figure class="portrait"><img src="' + esc(src(E.photo)) + '" alt="' + esc(t(LAB.photoAlt)) + '" loading="lazy"></figure>' +
+      "</div></section>";
 
     h += '<section class="sec c3" id="project">' + head("project") + rows(R.project) + "</section>";
     h += '<section class="sec c1" id="leadership">' + head("leadership") + rows(R.leadership) + "</section>";
