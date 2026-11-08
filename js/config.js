@@ -4,7 +4,7 @@
 window.SITE_CONFIG = {
   // 预约后台地址：部署 Google Apps Script 后得到的 Web App 网址（见 README）
   // 留空时预约系统以「演示模式」运行，用示例时间，不会真正提交
-  bookingApi: "",
+  bookingApi: "https://script.google.com/macros/s/AKfycbyGVbze_pEuoyEh4ZYbjeA2OOtwpzx_vZYfEbH0UG5ntuoCmotIMu507KQD4SwCTjIO/exec",
 
   // 你设置可预约时间时使用的时区（访客会看到换算成他们当地的时间）
   ownerTimezone: "America/New_York",
