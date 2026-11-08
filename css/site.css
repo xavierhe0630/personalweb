@@ -69,13 +69,6 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .p1-meta a{color:var(--c1)}
 .p1-meta .sep{margin:0 4px;opacity:.6}
 .p1-meta .todo{color:var(--muted);font-style:italic}
-.about{padding:24px;min-height:220px;display:flex;flex-direction:column;gap:10px;background:var(--bg);border-radius:6px}
-.about h2{margin:0;font-size:15px;font-weight:600;color:var(--c1)}
-.about p{margin:0;font-size:15px}
-.about.filled{border:1px solid var(--line);border-left:4px solid var(--c1);color:var(--ink)}
-.about .lines{flex:1;display:flex;flex-direction:column;justify-content:space-evenly;gap:14px;margin-top:6px}
-.about .lines span{display:block;height:1px;background:var(--line)}
-.about .lines span:nth-child(3){width:70%}
 /* 目录条：下滑时固定在导航栏下方 */
 .p1{overflow-x:clip}
 .p1-jump-bar{position:sticky;top:calc(env(safe-area-inset-top,0px) + var(--nav-h));z-index:15}
@@ -107,13 +100,17 @@ a.proj-shot:hover{border-color:var(--sc,var(--c1));transform:translateY(-2px)}
 .proj-btn{font-size:14px;padding:7px 16px;border-radius:999px;border:1px solid var(--sc,var(--c1));color:var(--sc,var(--c1));text-decoration:none;font-family:Archivo,"Noto Sans SC",sans-serif}
 .proj-btn.primary{background:var(--sc,var(--c1));color:var(--on-accent)}
 .proj-btn:hover{opacity:.85}
-.edu-grid{display:grid;grid-template-columns:minmax(0,380px) minmax(0,1fr);gap:clamp(32px,4vw,64px);align-items:start}
+.edu-grid{display:grid;grid-template-columns:minmax(0,380px) minmax(0,1fr);gap:clamp(32px,4vw,64px);align-items:stretch}
 .schools-shot{margin:0;border:1px solid var(--line);border-radius:8px;overflow:hidden;background:var(--surface)}
 .schools-shot img{width:100%}
-.edu-side{position:sticky;top:calc(env(safe-area-inset-top,0px) + var(--nav-h) + 88px);display:grid;grid-template-columns:minmax(0,400px) minmax(0,1fr);gap:clamp(24px,3vw,48px);align-items:start}
-@media (max-width:1100px){.edu-side{grid-template-columns:1fr}}
-.portrait{margin:0;max-width:400px}
-.portrait img{width:100%;aspect-ratio:3/4;object-fit:cover;border-radius:8px}
+/* 右栏与左侧学校截图等高：学位信息在上，照片填满剩余高度 */
+.edu-side{display:flex;flex-direction:column;gap:28px}
+.edu-side .degrees{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.edu-side .degree{padding:0;border-top:0;border-left:3px solid var(--sc);padding-left:16px}
+.portrait{margin:0;flex:1;position:relative;min-height:420px}
+.portrait img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 30%;border-radius:8px}
+.hero-photo{margin:0;justify-self:end;width:min(100%,400px)}
+.hero-photo img{width:100%;aspect-ratio:1;object-fit:cover;border-radius:12px;border:1px solid var(--line)}
 .degree{padding:16px 0;border-top:1px solid var(--line)}
 .degree:first-child{border-top:0;padding-top:0}
 .degree h3{margin:0;font-size:18px;font-weight:600}
@@ -139,7 +136,10 @@ a.proj-shot:hover{border-color:var(--sc,var(--c1));transform:translateY(-2px)}
 @media (max-width:860px){
   .p1-hero-grid,.edu-grid,.two{grid-template-columns:1fr;gap:32px}
   .p1-hero-grid{padding-top:48px;padding-bottom:40px}
-  .edu-side{position:static}
+  .portrait{min-height:0}
+  .edu-side .degrees{grid-template-columns:1fr}
+  .portrait img{position:static;aspect-ratio:3/4;height:auto}
+  .hero-photo{justify-self:start;width:min(100%,320px)}
   .schools-shot{max-width:380px}
   .row{grid-template-columns:1fr;gap:8px}
   .gallery{grid-template-columns:1fr 1fr}
@@ -151,8 +151,7 @@ a.proj-shot:hover{border-color:var(--sc,var(--c1));transform:translateY(-2px)}
 @media print{
   @page{margin:14mm}
   body{background:#fff!important;color:#000}
-  .nav,body::before,.p1-jump-bar,.proj-show,.no-print,.schools-shot,.portrait,.about.ph{display:none!important}
-  .p1-band{background:none;border:0}
+  .nav,body::before,.p1-jump-bar,.proj-show,.hero-photo,.no-print,.schools-shot,.portrait,  .p1-band{background:none;border:0}
   .p1-hero-grid{padding:0 0 12px;display:block}
   .p1-name{font-size:34px;line-height:1.1}
   .p1-name br{display:none}
