@@ -79,7 +79,6 @@
   function render() {
     var root = document.getElementById("resume-root");
     if (!root || !R) return;
-    var about = t(R.about);
     var h = "";
 
     h += '<header class="p1-band"><div class="wrap p1-hero-grid"><div>' +
@@ -89,9 +88,7 @@
       ' <span class="sep">/</span> ' +
       (R.linkedin ? '<a href="' + esc(R.linkedin) + '" target="_blank" rel="noopener">LinkedIn</a>' : '<span class="todo">' + esc(t(LAB.linkedinTodo)) + "</span>") +
       "</p></div>" +
-      (about
-        ? '<section class="about filled"><h2>' + esc(t(LAB.about)) + "</h2><p>" + esc(about) + "</p></section>"
-        : '<section class="about ph"><h2>' + esc(t(LAB.about)) + "</h2><p>" + esc(t(LAB.aboutHint)) + '</p><div class="lines" aria-hidden="true"><span></span><span></span><span></span></div></section>') +
+      (R.heroPhoto ? '<figure class="hero-photo"><img src="' + esc(src(R.heroPhoto)) + '" alt="' + esc(t(LAB.photoAlt)) + '"></figure>' : "") +
       "</div></header>";
 
     h += '<div class="wrap"><div class="p1-jump-bar"><nav class="p1-jump" aria-label="' + (zh() ? "本页目录" : "On this page") + '">' +
@@ -103,10 +100,10 @@
     var E = R.education;
     h += '<section class="sec c2" id="education">' + head("education") +
       '<div class="edu-grid"><figure class="schools-shot"><img src="' + esc(src(E.schoolsImage)) + '" alt="' + esc(t(LAB.schoolsAlt)) + '" loading="lazy"></figure>' +
-      '<div class="edu-side"><figure class="portrait"><img src="' + esc(src(E.photo)) + '" alt="' + esc(t(LAB.photoAlt)) + '" loading="lazy"></figure>' +
-      '<div class="degrees">' + E.degrees.map(function (g) {
+      '<div class="edu-side"><div class="degrees">' + E.degrees.map(function (g) {
         return '<div class="degree"><h3>' + esc(t(g.school)) + "</h3><p>" + esc(t(g.degree)) + '</p><span class="dates">' + range(g.when) + "</span></div>";
-      }).join("") + "</div></div></div></section>";
+      }).join("") + '</div><figure class="portrait"><img src="' + esc(src(E.photo)) + '" alt="' + esc(t(LAB.photoAlt)) + '" loading="lazy"></figure>' +
+      "</div></div></section>";
 
     h += '<section class="sec c3" id="project">' + head("project") + rows(R.project) + "</section>";
     h += '<section class="sec c1" id="leadership">' + head("leadership") + rows(R.leadership) + "</section>";
