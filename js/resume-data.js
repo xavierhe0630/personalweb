@@ -99,11 +99,14 @@
     ],
 
     education: {
-      schoolsImage: "assets/schools.jpg", // 学校定位截图（左）
-      photo: "assets/photo.jpg",          // 个人照片（右），替换这个文件即可
-      degrees: [
-        { school: L("Northeastern University", "美国东北大学"), degree: L("M.S. in Analytics, Statistical Modeling", "分析学硕士，统计建模方向"), when: ["2025", "2027"] },
-        { school: L("University of Florida", "佛罗里达大学"), degree: L("B.A. in Economics & Business Administration", "经济学与工商管理 文学学士"), when: ["2019", "2023"] }
+      photo: "assets/education.jpg", // 教育经历的照片，替换这个文件即可
+      // 每所学校一行：学校名、学位或阶段、年份（可不填）、定位卡片截图
+      schools: [
+        { school: L("Northeastern University", "美国东北大学"), degree: L("M.S. in Analytics, Statistical Modeling", "分析学硕士，统计建模方向"), when: ["2025", "2027"], map: "assets/card-neu.jpg" },
+        { school: L("University of Florida", "佛罗里达大学"), degree: L("B.A. in Economics & Business Administration", "经济学与工商管理 文学学士"), when: ["2019", "2023"], map: "assets/card-uf.jpg" },
+        { school: L("The High School Attached to Northwest Normal University", "西北师范大学附属中学"), degree: L("High school, Lanzhou", "高中，兰州"), map: "assets/card-sdfz.jpg" },
+        { school: L("Lanzhou No. 11 Middle School", "兰州市第十一中学"), degree: L("Middle school, Lanzhou", "初中，兰州"), map: "assets/card-l11.jpg" },
+        { school: L("Yizhichuan Primary School", "一只船小学"), degree: L("Primary school, Lanzhou", "小学，兰州"), map: "assets/card-yzc.jpg" }
       ]
     },
 
