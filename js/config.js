@@ -14,7 +14,7 @@ window.SITE_CONFIG = {
     wechat: { qr: "assets/pay-wechat.png" },
     alipay: { qr: "assets/pay-alipay.png" },
     // Zelle：绑定 Zelle 的邮箱或手机号，以及 Zelle 上显示的收款人姓名
-    zelle: { name: "", id: "" }
+    zelle: { name: "Yixuan", id: "heyixuan1390@gmail.com" }
   },
 
   // 付款后的确认说明（可改成你自己的话）
