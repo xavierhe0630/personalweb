@@ -9,6 +9,7 @@
   var OTZ = C.ownerTimezone || "America/New_York";
   var data = null, loadErr = false, loading = null;
   var widgets = [];
+  var demoIds = {};
 
   var S = {
     demo: { zh: "演示模式：以下是示例时间和价格，提交不会真的预约。在 js/config.js 填入后台地址后会自动换成真实数据。", en: "Demo mode: sample times and prices. Nothing is actually booked. Add your backend URL in js/config.js to go live." },
@@ -23,11 +24,11 @@
     perUnit: { zh: "按时长，每 {n} 分钟", en: "By length, per {n} min" },
     mins: { zh: "{n} 分钟", en: "{n} min" },
     left: { zh: "剩 {n} 位", en: "{n} left" },
-    tzNote: { zh: "每个时间同时显示美国东部时间（12 小时制）和北京时间（24 小时制）。", en: "Each time is shown in US Eastern time (12-hour) and Beijing time (24-hour)." },
+    tzNote: { zh: "每个时间同时显示美国东部时间和北京时间（12 小时制）。", en: "Each time is shown in US Eastern and Beijing time (12-hour clock)." },
     us: { zh: "美东", en: "US ET" },
     cn: { zh: "北京", en: "Beijing" },
-    usLong: { zh: "美国东部时间", en: "US Eastern" },
-    cnLong: { zh: "北京时间", en: "Beijing time" },
+    usLong: { zh: "美国东部", en: "US Eastern" },
+    cnLong: { zh: "北京", en: "Beijing" },
     none: { zh: "近期暂无可预约时间，请过几天再来看看。", en: "No open times right now. Please check back in a few days." },
     noneForPick: { zh: "这个项目近期没有合适的时间，换个项目或时长试试。", en: "No open times for this choice. Try another service or length." },
     name: { zh: "称呼", en: "Name" },
@@ -84,18 +85,24 @@
   function pad2(n) { return (n < 10 ? "0" : "") + n; }
   function dateStr(p) { return window.I18N.get() === "zh" ? p.y + "年" + p.m + "月" + p.d + "日 " + WK[p.wk] : p.wk + ", " + MON[p.m - 1] + " " + p.d + ", " + p.y; }
   function usClock(p) { return (p.h % 12 || 12) + ":" + p.mi + " " + (p.h < 12 ? "AM" : "PM"); }
-  function cnClock(p) { return pad2(p.h) + ":" + p.mi; }
+  function cnClock(p) { return usClock(p); } // 北京时间也用 12 小时制（AM/PM）
   function dayKey(ms) { var p = parts(ms, OTZ); return p.y + "-" + pad2(p.m) + "-" + pad2(p.d); }
   function fmtDay(ms) { return dateStr(parts(ms, OTZ)); }
+  // 两行时间：标签 | - | 日期 | 时刻，用网格对齐
   function bothLines(ms) {
     var u = parts(ms, OTZ), c = parts(ms, CTZ);
-    return '<span class="bk-when"><span><em>' + t(S.usLong) + "</em>" + esc(dateStr(u)) + " " + usClock(u) + "</span>" +
-      "<span><em>" + t(S.cnLong) + "</em>" + esc(dateStr(c)) + " " + cnClock(c) + "</span></span>";
+    function line(label, p, clock) {
+      return '<div class="bk-when-line"><span class="bk-wl">' + label + '</span><span class="bk-wdash">-</span><span class="bk-wd">' +
+        esc(dateStr(p)) + '</span><span class="bk-wc">' + clock + "</span></div>";
+    }
+    return '<div class="bk-when">' + line(t(S.usLong), u, usClock(u)) + line(t(S.cnLong), c, cnClock(c)) + "</div>";
   }
+  // 时间按钮：两行分开显示，美东一行、北京一行
   function timeChip(ms) {
     var u = parts(ms, OTZ), c = parts(ms, CTZ), other = c.d !== u.d;
-    return '<span class="bk-t1">' + usClock(u) + " <i>" + t(S.us) + "</i></span>" +
-      '<span class="bk-t2">' + cnClock(c) + " " + t(S.cn) + (other ? " (" + (window.I18N.get() === "zh" ? c.m + "月" + c.d + "日" : MON[c.m - 1] + " " + c.d) + ")" : "") + "</span>";
+    var cday = other ? '<span class="bk-tday">' + (window.I18N.get() === "zh" ? c.m + "月" + c.d + "日" : MON[c.m - 1] + " " + c.d) + "</span>" : "";
+    return '<span class="bk-trow"><span class="bk-tlab">' + t(S.usLong) + '</span><span class="bk-tval">' + usClock(u) + "</span></span>" +
+      '<span class="bk-trow"><span class="bk-tlab">' + t(S.cnLong) + '</span><span class="bk-tval">' + cnClock(c) + "</span>" + cday + "</span>";
   }
   function svcName(s) { return window.I18N.get() === "zh" ? (s.name_zh || s.name_en) : (s.name_en || s.name_zh); }
   function svcDesc(s) { return window.I18N.get() === "zh" ? (s.desc_zh || "") : (s.desc_en || ""); }
@@ -245,7 +252,7 @@
       var slot = data.slots.filter(function (x) { return x.id === self.slot; })[0];
       var p = price(s, this.dur), f = this.form;
       h += '<form class="bk-step bk-form" novalidate><h3>' + t(S.s5) + "</h3>" +
-        '<div class="bk-sum"><span>' + esc(svcName(s)) + "</span>" + bothLines(slot.start) + "<span>" + t(S.mins, { n: p.minutes }) + '</span><b>$' + money(p.usd) + " / ¥" + money(p.cny) + "</b></div>" +
+        '<div class="bk-sum"><div class="bk-sum-head"><span class="bk-sum-svc">' + esc(svcName(s)) + "</span><span>" + t(S.mins, { n: p.minutes }) + '</span><b>$' + money(p.usd) + " / ¥" + money(p.cny) + "</b></div>" + bothLines(slot.start) + "</div>" +
         '<label class="bk-field"><span>' + t(S.name) + '</span><input name="name" maxlength="60" autocomplete="name" value="' + esc(f.name) + '" required></label>' +
         '<div class="bk-row"><label class="bk-field bk-narrow"><span>' + t(S.contactType) + '</span><select name="ctype">' +
         ["wechat", "email", "phone"].map(function (k) { return '<option value="' + k + '"' + (f.ctype === k ? " selected" : "") + ">" + t(S[k]) + "</option>"; }).join("") +
@@ -282,7 +289,7 @@
     }
     return '<div class="bk bk-done" tabindex="-1">' + (data && data.demo ? '<p class="bk-demo">' + t(S.demo) + "</p>" : "") +
       '<h3 class="bk-title">' + t(S.done) + '</h3><p class="bk-id">' + t(S.idLabel) + " <b>" + esc(r.id) + "</b></p>" +
-      '<div class="bk-sum"><span>' + esc(rs ? svcName(rs) : r.svcKey) + "</span>" + bothLines(r.start) + "<span>" + t(S.mins, { n: r.minutes }) + "</span></div>" +
+      '<div class="bk-sum"><div class="bk-sum-head"><span class="bk-sum-svc">' + esc(rs ? svcName(rs) : r.svcKey) + "</span><span>" + t(S.mins, { n: r.minutes }) + "</span></div>" + bothLines(r.start) + "</div>" +
       "<h3>" + t(S.payTitle) + '</h3><div class="bk-chips">' + tabs + "</div>" + panel +
       '<p class="bk-note">' + t(S.memo) + " " + esc(t(C.confirmNote || "")) + "</p>" +
       '<button type="button" class="bk-chip" data-act="again">' + t(S.again) + "</button></div>";
@@ -333,7 +340,7 @@
       }
     };
     this.busy = true; this.msg = ""; this.render();
-    if (data.demo) { setTimeout(function () { done({ ok: true, id: "DEMO-" + Math.random().toString(36).slice(2, 6).toUpperCase() }); }, 500); return; }
+    if (data.demo) { var pre = { yijing: "IC", tarot: "TR", both: "TI" }[s.key] || "BK"; demoIds[pre] = (demoIds[pre] || 999) + 1; setTimeout(function () { done({ ok: true, id: pre + demoIds[pre] }); }, 500); return; }
     fetch(C.bookingApi, { method: "POST", body: JSON.stringify(payload) })
       .then(function (r) { return r.json(); })
       .then(done)
