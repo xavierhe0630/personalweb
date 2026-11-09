@@ -205,7 +205,8 @@ html[data-lang="en"] .p2-sub{letter-spacing:0}
 .p2-sec h2{font-family:"Ma Shan Zheng","Noto Serif SC",serif;font-weight:400;font-size:44px;margin:0 0 8px;line-height:1.2}
 html[data-lang="en"] .p2-sec h2{font-family:"Noto Serif SC",serif;font-weight:600;font-size:34px}
 .p2-sec .lead{color:var(--muted);margin:0 0 36px;max-width:60ch}
-.motto{margin:8px 0 0;font-family:"Ma Shan Zheng","Noto Serif SC",serif;font-size:clamp(28px,4vw,44px);line-height:1.4;color:var(--ink)}
+.p2-motto{padding:96px 0}
+.motto{margin:0 auto;text-align:center;font-family:"Ma Shan Zheng","Noto Serif SC",serif;font-size:clamp(28px,4vw,44px);line-height:1.4;color:var(--ink)}
 html[data-lang="en"] .motto{font-family:"Noto Serif SC",serif;font-size:clamp(22px,3vw,30px)}
 .p2-about{display:grid;grid-template-columns:1.2fr 1fr;gap:40px;align-items:stretch}
 .p2-about .ph{padding:24px;line-height:2}
