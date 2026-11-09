@@ -205,6 +205,8 @@ html[data-lang="en"] .p2-sub{letter-spacing:0}
 .p2-sec h2{font-family:"Ma Shan Zheng","Noto Serif SC",serif;font-weight:400;font-size:44px;margin:0 0 8px;line-height:1.2}
 html[data-lang="en"] .p2-sec h2{font-family:"Noto Serif SC",serif;font-weight:600;font-size:34px}
 .p2-sec .lead{color:var(--muted);margin:0 0 36px;max-width:60ch}
+.motto{margin:8px 0 0;font-family:"Ma Shan Zheng","Noto Serif SC",serif;font-size:clamp(28px,4vw,44px);line-height:1.4;color:var(--ink)}
+html[data-lang="en"] .motto{font-family:"Noto Serif SC",serif;font-size:clamp(22px,3vw,30px)}
 .p2-about{display:grid;grid-template-columns:1.2fr 1fr;gap:40px;align-items:stretch}
 .p2-about .ph{padding:24px;line-height:2}
 .trigrams{display:grid;grid-template-columns:repeat(8,1fr);border:1px solid var(--line)}
@@ -215,6 +217,41 @@ html[data-lang="en"] .p2-sec h2{font-family:"Noto Serif SC",serif;font-weight:60
 .tri .nt{font-size:13px;color:var(--muted)}
 .svc{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
 .svc .ph{padding:28px 24px;min-height:200px;display:flex;flex-direction:column;gap:8px;background:var(--surface);border-color:transparent}
+/* 问卜方式卡片 */
+.method{padding:28px 24px;display:flex;flex-direction:column;gap:10px;background:var(--surface);border-radius:6px}
+.method h3{margin:4px 0 0;font-size:24px;line-height:1.25;display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 12px}
+.method h3 small{font-size:13px;font-weight:400;color:var(--muted);letter-spacing:.04em}
+.method .method-tag{margin:0;color:var(--accent);font-size:15px}
+.method dl{margin:6px 0 0;display:grid;gap:4px}
+.method dt{font-size:12px;color:var(--muted);letter-spacing:.08em;margin-top:8px}
+.method dd{margin:0;font-size:15px;line-height:1.8}
+.method-more{align-self:flex-start;margin-top:auto;padding:6px 0 0;background:none;border:0;color:var(--accent);font:inherit;font-size:14px;cursor:pointer}
+.method-more:hover{text-decoration:underline}
+/* 三种方法详解 */
+.mdetail{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,2.2fr);gap:clamp(24px,4vw,64px);padding:48px 0;border-top:1px solid var(--line);scroll-margin-top:calc(env(safe-area-inset-top,0px) + var(--nav-h) + 16px)}
+.mdetail:first-of-type{border-top:0;padding-top:12px}
+.mdetail-head h3{font-family:"Ma Shan Zheng","Noto Serif SC",serif;font-weight:400;font-size:52px;line-height:1.1;margin:0}
+html[data-lang="en"] .mdetail-head h3{font-family:"Noto Serif SC",serif;font-weight:600;font-size:32px}
+.mdetail-head .pinyin{margin:6px 0 18px;color:var(--muted);letter-spacing:.12em;font-size:14px}
+.mdetail-head .origin{margin:0;padding-left:14px;border-left:3px solid var(--accent);color:var(--muted);font-size:14px;line-height:1.9}
+.mdetail-body h4{margin:22px 0 6px;font-size:13px;font-weight:600;color:var(--accent);letter-spacing:.12em}
+.mdetail-body h4:first-child{margin-top:0}
+.mdetail-body p{margin:0;font-size:16px;line-height:1.95;max-width:68ch}
+.ask-grid{list-style:none;margin:4px 0 0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:10px}
+.ask-grid li{background:var(--surface);border-radius:6px;padding:12px 14px;display:flex;flex-direction:column;gap:2px}
+.ask-grid b{font-size:15px}
+.ask-grid span{font-size:14px;color:var(--muted);line-height:1.7}
+.mdetail-body .bring{max-width:none;margin-top:22px;padding:14px 16px;border:1px dashed var(--line);border-radius:6px;display:flex;flex-direction:column;gap:4px;font-size:15px}
+.bring b{font-size:13px;color:var(--accent);letter-spacing:.08em}
+.mdetail-body .mnote{margin-top:12px;font-size:14px;color:var(--muted)}
+.mcompare-title{margin:56px 0 16px;font-size:22px}
+.mcompare-wrap{overflow-x:auto}
+.mcompare{width:100%;border-collapse:collapse;min-width:640px;font-size:15px}
+.mcompare th,.mcompare td{text-align:left;vertical-align:top;padding:14px 16px;border-bottom:1px solid var(--line);line-height:1.7}
+.mcompare thead th{font-size:18px;border-bottom:2px solid var(--accent)}
+.mcompare tbody th{font-size:13px;font-weight:600;color:var(--muted);white-space:nowrap;letter-spacing:.06em}
+.mpick{margin:20px 0 0;color:var(--muted);font-size:15px}
+@media (max-width:860px){.mdetail{grid-template-columns:1fr;gap:16px;padding:36px 0}.mdetail-head h3{font-size:42px}}
 .svc .hx{width:44px;height:44px;margin-bottom:8px}
 .svc h3{margin:0;font-size:22px;color:var(--ink)}
 .steps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(5,1fr)}
