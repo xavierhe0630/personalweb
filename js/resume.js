@@ -67,7 +67,8 @@
   }
   function rows(list) {
     return list.map(function (x) {
-      return '<article class="row"><div class="when"><b>' + esc(t(x.org)) + "</b>" +
+      return '<article class="row"><div class="when' + (x.group ? " has-group" : "") + '">' +
+        (x.group ? '<b class="grp">' + esc(t(x.group)) + "</b>" : "") + "<b>" + esc(t(x.org)) + "</b>" +
         (x.when ? '<span class="dates">' + range(x.when) + "</span>" : "") +
         (x.where ? "<span>" + esc(t(x.where)) + "</span>" : "") +
         '</div><div class="what"><h3>' + esc(t(x.role)) + "</h3><ul>" +

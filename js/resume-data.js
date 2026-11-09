@@ -152,7 +152,7 @@
 
     leadership: [
       {
-        org: L("Northeastern University", "美国东北大学"), role: L("Member, Graduate Student Government", "研究生会（GSG）成员"),
+        org: L("Northeastern University", "美国东北大学"), group: L("Graduate Student Government", "研究生会（GSG）"), role: L("Member", "成员"),
         when: ["2025-05", "now"],
         points: [
           L("Represent graduate student interests on the GSG council, advancing initiatives that promote academic integrity, judicial standards, and diversity across the graduate community.",
@@ -164,7 +164,7 @@
         ]
       },
       {
-        org: L("Northeastern University", "美国东北大学"), role: L("Vice President, Chinese Students and Scholars Association", "中国学生学者联合会（CSSA）副主席"),
+        org: L("Northeastern University", "美国东北大学"), group: L("Chinese Students and Scholars Association", "中国学生学者联合会（CSSA）"), role: L("Vice President", "副主席"),
         when: ["2025-01", "now"],
         points: [
           L("Direct the association’s financial operations and annual budget, implementing internal controls that ensure full compliance with university financial policies.",
@@ -174,7 +174,7 @@
         ]
       },
       {
-        org: L("University of Florida", "佛罗里达大学"), role: L("Director of Student Service Department, Chinese Students Association", "中国学生会 学生服务部部长"),
+        org: L("University of Florida", "佛罗里达大学"), group: L("Chinese Students Association", "中国学生会"), role: L("Director of Student Service Department", "学生服务部部长"),
         when: ["2020-02", "2022-04"],
         points: [
           L("Created and managed communication channels for 3,000+ Chinese international students and scholars, easing their transition to Gainesville and American culture.",
@@ -184,7 +184,7 @@
         ]
       },
       {
-        org: L("University of Florida", "佛罗里达大学"), role: L("Member, American Marketing Association", "美国市场营销协会（AMA）成员"),
+        org: L("University of Florida", "佛罗里达大学"), group: L("American Marketing Association", "美国市场营销协会（AMA）"), role: L("Member", "成员"),
         when: ["2019-08", "2023-05"],
         points: [
           L("Examined how diversity, equity, inclusion, and accessibility principles can be built into marketing strategy through a case study led by AMA’s Director of DEIA.",
