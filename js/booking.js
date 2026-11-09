@@ -18,6 +18,9 @@
     retry: { zh: "重新加载", en: "Reload" },
     s1: { zh: "选择项目", en: "Choose a service" },
     s2: { zh: "选择时长", en: "Choose a length" },
+    sM: { zh: "选择问卜方式", en: "Choose a method" },
+    needMethod: { zh: "请先选择问卜方式。", en: "Please choose a method first." },
+    methodLab: { zh: "方式", en: "Method" },
     s3: { zh: "选择日期", en: "Choose a date" },
     s4: { zh: "选择时间", en: "Choose a time" },
     s5: { zh: "填写信息", en: "Your details" },
@@ -104,6 +107,16 @@
     return '<span class="bk-trow"><span class="bk-tlab">' + t(S.usLong) + '</span><span class="bk-tval">' + usClock(u) + "</span></span>" +
       '<span class="bk-trow"><span class="bk-tlab">' + t(S.cnLong) + '</span><span class="bk-tval">' + cnClock(c) + "</span>" + cday + "</span>";
   }
+  /* 易经类项目让访客选择问卜方式；价格不变，由 Services 表决定 */
+  var METHODS = [
+    { k: "liuyao", zh: "六爻卜卦", en: "Liu Yao (Six Lines)" },
+    { k: "daliuren", zh: "大六壬", en: "Da Liu Ren" },
+    { k: "meihua", zh: "梅花易数", en: "Plum Blossom" },
+    { k: "any", zh: "不确定，请帮我选", en: "Not sure, choose for me" }
+  ];
+  var METHOD_SERVICES = ["yijing", "both"];
+  function needsMethod(s) { return !!s && METHOD_SERVICES.indexOf(s.key) >= 0; }
+  function methodName(k) { var m = METHODS.filter(function (x) { return x.k === k; })[0]; return m ? window.I18N.t(m) : ""; }
   function svcName(s) { return window.I18N.get() === "zh" ? (s.name_zh || s.name_en) : (s.name_en || s.name_zh); }
   function svcDesc(s) { return window.I18N.get() === "zh" ? (s.desc_zh || "") : (s.desc_en || ""); }
 
@@ -164,7 +177,7 @@
     el.addEventListener("submit", function (e) { e.preventDefault(); self.submit(); });
   }
   Widget.prototype.reset = function () {
-    this.svc = null; this.dur = null; this.day = null; this.slot = null;
+    this.svc = null; this.dur = null; this.day = null; this.slot = null; this.method = null;
     this.step = "pick"; this.msg = ""; this.busy = false; this.result = null; this.pay = "wechat";
     this.form = { name: "", ctype: "wechat", contact: "", q: "" };
   };
@@ -219,6 +232,12 @@
           '<span class="bk-price">$' + money(x.price_usd) + " / ¥" + money(x.price_cny) + '</span><small>' + line + "</small></button>";
       }).join("") + "</div></div>";
 
+    if (needsMethod(s)) {
+      h += '<div class="bk-step"><h3>' + t(S.sM) + '</h3><div class="bk-chips">' +
+        METHODS.map(function (m) { return '<button type="button" class="bk-chip" data-act="method" data-v="' + m.k + '" aria-pressed="' + (m.k === self.method) + '">' + esc(window.I18N.t(m)) + "</button>"; }).join("") +
+        "</div></div>";
+    }
+
     if (s && s.mode === "duration") {
       var durs = s.durations.length ? s.durations : [s.minutes];
       h += '<div class="bk-step"><h3>' + t(S.s2) + '</h3><div class="bk-chips">' +
@@ -252,7 +271,7 @@
       var slot = data.slots.filter(function (x) { return x.id === self.slot; })[0];
       var p = price(s, this.dur), f = this.form;
       h += '<form class="bk-step bk-form" novalidate><h3>' + t(S.s5) + "</h3>" +
-        '<div class="bk-sum"><div class="bk-sum-head"><span class="bk-sum-svc">' + esc(svcName(s)) + "</span><span>" + t(S.mins, { n: p.minutes }) + '</span><b>$' + money(p.usd) + " / ¥" + money(p.cny) + "</b></div>" + bothLines(slot.start) + "</div>" +
+        '<div class="bk-sum"><div class="bk-sum-head"><span class="bk-sum-svc">' + esc(svcName(s)) + (needsMethod(s) && this.method ? (window.I18N.get() === "zh" ? "，" : ", ") + esc(methodName(this.method)) : "") + "</span><span>" + t(S.mins, { n: p.minutes }) + '</span><b>$' + money(p.usd) + " / ¥" + money(p.cny) + "</b></div>" + bothLines(slot.start) + "</div>" +
         '<label class="bk-field"><span>' + t(S.name) + '</span><input name="name" maxlength="60" autocomplete="name" value="' + esc(f.name) + '" required></label>' +
         '<div class="bk-row"><label class="bk-field bk-narrow"><span>' + t(S.contactType) + '</span><select name="ctype">' +
         ["wechat", "email", "phone"].map(function (k) { return '<option value="' + k + '"' + (f.ctype === k ? " selected" : "") + ">" + t(S[k]) + "</option>"; }).join("") +
@@ -289,7 +308,7 @@
     }
     return '<div class="bk bk-done" tabindex="-1">' + (data && data.demo ? '<p class="bk-demo">' + t(S.demo) + "</p>" : "") +
       '<h3 class="bk-title">' + t(S.done) + '</h3><p class="bk-id">' + t(S.idLabel) + " <b>" + esc(r.id) + "</b></p>" +
-      '<div class="bk-sum"><div class="bk-sum-head"><span class="bk-sum-svc">' + esc(rs ? svcName(rs) : r.svcKey) + "</span><span>" + t(S.mins, { n: r.minutes }) + "</span></div>" + bothLines(r.start) + "</div>" +
+      '<div class="bk-sum"><div class="bk-sum-head"><span class="bk-sum-svc">' + esc(rs ? svcName(rs) : r.svcKey) + (r.method ? (window.I18N.get() === "zh" ? "，" : ", ") + esc(methodName(r.method)) : "") + "</span><span>" + t(S.mins, { n: r.minutes }) + "</span></div>" + bothLines(r.start) + "</div>" +
       "<h3>" + t(S.payTitle) + '</h3><div class="bk-chips">' + tabs + "</div>" + panel +
       '<p class="bk-note">' + t(S.memo) + " " + esc(t(C.confirmNote || "")) + "</p>" +
       '<button type="button" class="bk-chip" data-act="again">' + t(S.again) + "</button></div>";
@@ -301,6 +320,7 @@
     if (this.step === "pick") this.saveForm();
     if (a === "svc") { this.svc = v; this.slot = null; this.msg = ""; }
     else if (a === "dur") { this.dur = +v; this.slot = null; }
+    else if (a === "method") { this.method = v; this.msg = ""; }
     else if (a === "day") { this.day = v; this.slot = null; }
     else if (a === "slot") { this.slot = v; this.msg = ""; }
     else if (a === "pay") { this.pay = v; }
@@ -316,11 +336,12 @@
     this.saveForm();
     var f = this.form, s = this.svcObj(), self = this;
     var slot = data.slots.filter(function (x) { return x.id === self.slot; })[0];
+    if (needsMethod(s) && !this.method) { this.msg = t(S.needMethod); this.render(); return; }
     if (!f.name.trim() || !f.contact.trim()) { this.msg = t(S.need); this.render(); return; }
     var hp = this.el.querySelector('input[name="website"]');
     var p = price(s, this.dur);
     var payload = {
-      action: "book", slotId: slot.id, service: s.key, duration: p.minutes,
+      action: "book", slotId: slot.id, service: s.key, duration: p.minutes, method: needsMethod(s) ? this.method : "",
       name: f.name.trim(), contactType: f.ctype, contact: f.contact.trim(), question: f.q.trim(),
       payMethod: this.pay, lang: window.I18N.get(), tz: VTZ, website: hp ? hp.value : ""
     };
@@ -328,13 +349,13 @@
       self.busy = false;
       if (res && res.ok) {
         slot.left = Math.max(0, slot.left - 1);
-        self.result = { id: res.id, usd: res.price_usd != null ? res.price_usd : p.usd, cny: res.price_cny != null ? res.price_cny : p.cny, minutes: p.minutes, start: slot.start, svcKey: s.key };
+        self.result = { id: res.id, usd: res.price_usd != null ? res.price_usd : p.usd, cny: res.price_cny != null ? res.price_cny : p.cny, minutes: p.minutes, start: slot.start, svcKey: s.key, method: needsMethod(s) ? self.method : "" };
         self.step = "done"; self.render();
         var box = self.el.querySelector(".bk-done"); if (box) box.focus();
         renderAll(self);
       } else {
         var err = res && res.error;
-        self.msg = err === "full" ? t(S.full) : (err === "slot" || err === "service" || err === "duration") ? t(S.gone) : err === "invalid" ? t(S.need) : t(S.fail);
+        self.msg = err === "method" ? t(S.needMethod) : err === "full" ? t(S.full) : (err === "slot" || err === "service" || err === "duration") ? t(S.gone) : err === "invalid" ? t(S.need) : t(S.fail);
         if (err === "full" || err === "slot") { self.slot = null; load(true).then(renderAll); }
         else self.render();
       }

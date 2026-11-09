@@ -53,6 +53,14 @@
     g.innerHTML = html;
   }
 
+  // 页内跳转按钮（不改变网址里的 #，避免切换页面）
+  document.addEventListener("click", function (e) {
+    var b = e.target.closest && e.target.closest("[data-scroll]");
+    if (!b) return;
+    var el = document.getElementById(b.getAttribute("data-scroll"));
+    if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+  });
+
   // 塔罗翻牌
   document.querySelectorAll(".card").forEach(function (c) {
     c.addEventListener("click", function () { c.classList.toggle("flipped"); });
