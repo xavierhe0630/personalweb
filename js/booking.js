@@ -112,7 +112,7 @@
     { k: "liuyao", zh: "六爻卜卦", en: "Liu Yao (Six Lines)" },
     { k: "daliuren", zh: "大六壬", en: "Da Liu Ren" },
     { k: "meihua", zh: "梅花易数", en: "Plum Blossom" },
-    { k: "any", zh: "不确定，请帮我选", en: "Not sure, choose for me" }
+    { k: "any", zh: "不确定", en: "Not sure" }
   ];
   var METHOD_SERVICES = ["yijing", "both"];
   function needsMethod(s) { return !!s && METHOD_SERVICES.indexOf(s.key) >= 0; }
