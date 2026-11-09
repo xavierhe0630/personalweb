@@ -88,6 +88,9 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .row:first-of-type{border-top:0;padding-top:0}
 .when{font-size:13px;color:var(--muted);font-variant-numeric:tabular-nums;display:flex;flex-direction:column}
 .when b{color:var(--sc,var(--c1));font-weight:600;font-size:15px;margin-bottom:2px}
+/* 领导力：组织名在上、字号大两号；学校名在下 */
+.when b.grp{font-size:17px;line-height:1.35;margin-bottom:4px}
+.when.has-group b:not(.grp){color:var(--ink);font-weight:500}
 .what h3{margin:0 0 10px;font-size:19px;font-weight:600;letter-spacing:-.01em}
 .what ul{margin:0;padding-left:18px;font-size:16px;font-family:"Noto Sans SC",Archivo,sans-serif}
 .what li{margin:8px 0}
@@ -168,6 +171,7 @@ a.proj-shot:hover{border-color:var(--sc,var(--c1));transform:translateY(-2px)}
   .what li{margin:1px 0}
   body{line-height:1.4}
   .when b{font-size:12px}
+  .when b.grp{font-size:13px}
   .p1-meta .todo,.p1-meta .todo + *{display:none}
   .two{grid-template-columns:1fr 1fr;gap:24px}
   .skill-row{padding:4px 0;border:0}
