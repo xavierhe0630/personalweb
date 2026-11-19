@@ -81,6 +81,9 @@
     var root = document.getElementById("resume-root");
     if (!root || !R) return;
     var h = "";
+    // 照片墙：resume-data.js 里至少有一张照片填了 src 才显示，否则整个板块和目录按钮都隐藏
+    var hasPhotos = (R.gallery || []).some(function (g) { return g.src; });
+    var jumps = JUMP.filter(function (k) { return k !== "gallery" || hasPhotos; });
 
     h += '<header class="p1-band"><div class="wrap p1-hero-grid"><div>' +
       '<h1 class="p1-name">' + R.name.split(" ").map(esc).join(" <br>") + "</h1>" +
@@ -93,7 +96,7 @@
       "</div></header>";
 
     h += '<div class="wrap"><div class="p1-jump-bar"><nav class="p1-jump" aria-label="' + (zh() ? "本页目录" : "On this page") + '">' +
-      JUMP.map(function (k, i) { return '<button type="button" class="c' + (i % 3 + 1) + '" data-jump="' + k + '">' + esc(t(JUMP_LAB[k])) + "</button>"; }).join("") +
+      jumps.map(function (k, i) { return '<button type="button" class="c' + (i % 3 + 1) + '" data-jump="' + k + '">' + esc(t(JUMP_LAB[k])) + "</button>"; }).join("") +
       "</nav></div>";
 
     h += '<section class="sec c1" id="experience">' + head("experience") + rows(R.experience) + "</section>";
@@ -121,13 +124,15 @@
       R.certs.map(function (c) { return '<div class="cert">' + esc(t(c.name)) + "<span>" + d(c.when) + "</span></div>"; }).join("") +
       "</div></div></section>";
 
-    h += '<section class="sec c1 no-print" id="gallery">' + head("gallery") + '<div class="gallery">' +
-      R.gallery.map(function (g) {
-        var cls = g.big ? " big" : "";
-        return g.src
-          ? '<figure class="shot' + cls + '"><img src="' + esc(src(g.src)) + '" alt="' + esc(t(g.caption)) + '" loading="lazy"><figcaption>' + esc(t(g.caption)) + "</figcaption></figure>"
-          : '<div class="ph-img' + cls + '">' + IMG + "<span>" + esc(t(LAB.galleryTodo)) + "</span><span>" + esc(t(g.caption)) + "</span></div>";
-      }).join("") + "</div></section>";
+    if (hasPhotos) {
+      h += '<section class="sec c1 no-print" id="gallery">' + head("gallery") + '<div class="gallery">' +
+        R.gallery.map(function (g) {
+          var cls = g.big ? " big" : "";
+          return g.src
+            ? '<figure class="shot' + cls + '"><img src="' + esc(src(g.src)) + '" alt="' + esc(t(g.caption)) + '" loading="lazy"><figcaption>' + esc(t(g.caption)) + "</figcaption></figure>"
+            : '<div class="ph-img' + cls + '">' + IMG + "<span>" + esc(t(LAB.galleryTodo)) + "</span><span>" + esc(t(g.caption)) + "</span></div>";
+        }).join("") + "</div></section>";
+    }
 
     h += '<footer class="p1-foot"><span>' + esc(R.name) + ", " + esc(t(R.location)) + '</span><a href="mailto:' + esc(R.email) + '">' + esc(R.email) + "</a></footer></div>";
 
