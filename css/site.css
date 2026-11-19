@@ -64,6 +64,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .p1-band{background:var(--tint);border-bottom:1px solid var(--line)}
 .p1-hero-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:56px;align-items:end;padding-top:72px;padding-bottom:56px}
 .p1-name{font-size:clamp(56px,10vw,128px);line-height:.9;font-weight:800;letter-spacing:-.045em;margin:0;color:var(--ink)}
+.p1-name .name-zh{font-family:"Noto Sans SC","PingFang SC",sans-serif;font-weight:700;font-size:.72em;letter-spacing:0;margin-left:.18em;white-space:nowrap}
 .p1-name::after{content:"";display:block;width:96px;height:8px;margin-top:22px;background:linear-gradient(90deg,var(--c1) 0 33.3%,var(--c2) 33.3% 66.6%,var(--c3) 66.6%)}
 .p1-meta{margin:20px 0 0;color:var(--muted);font-size:15px}
 .p1-meta a{color:var(--c1)}
@@ -159,6 +160,7 @@ a.proj-shot:hover{border-color:var(--sc,var(--c1));transform:translateY(-2px)}
   .p1-name{font-size:34px;line-height:1.1}
   .p1-name br{display:none}
   .p1-name::after{width:60px;height:4px;margin-top:8px}
+  .p1-name .name-zh{font-size:.8em}
   .p1-meta{font-size:11px;margin-top:6px}
   .wrap{max-width:none;padding:0}
   .sec{padding:10px 0;border:0}
