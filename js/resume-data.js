@@ -9,6 +9,7 @@
 
   window.RESUME = {
     name: "Yixuan He",
+    nameZh: "何懿轩", // 显示在英文名后面，字号小一号
     tagline: L("M.S. Analytics, Northeastern University", "美国东北大学 分析学硕士在读"),
     location: L("Boston, MA", "波士顿"),
     email: "xavierhe0630@gmail.com",

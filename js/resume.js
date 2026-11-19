@@ -86,7 +86,7 @@
     var jumps = JUMP.filter(function (k) { return k !== "gallery" || hasPhotos; });
 
     h += '<header class="p1-band"><div class="wrap p1-hero-grid"><div>' +
-      '<h1 class="p1-name">' + R.name.split(" ").map(esc).join(" <br>") + "</h1>" +
+      '<h1 class="p1-name">' + R.name.split(" ").map(esc).join(" <br>") + (R.nameZh ? ' <span class="name-zh" lang="zh-CN">' + esc(R.nameZh) + "</span>" : "") + "</h1>" +
       '<p class="p1-meta">' + esc(t(R.tagline)) + "<br>" + esc(t(R.location)) +
       ' <span class="sep">/</span> <a href="mailto:' + esc(R.email) + '">' + esc(R.email) + "</a>" +
       ' <span class="sep">/</span> ' +
