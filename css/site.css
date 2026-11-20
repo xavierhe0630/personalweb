@@ -324,6 +324,35 @@ html[data-lang="en"] .p3-hero h1{font-size:clamp(36px,5.5vw,64px)}
 .p3-steps li::before{content:counter(s,upper-roman);font-family:Cinzel,serif;color:var(--accent);font-size:22px}
 .p3-steps h3{margin:6px 0;font-size:18px}
 .p3-steps p{margin:0;color:var(--muted);font-size:14px}
+/* 牌阵介绍 */
+.spreads-v2{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;align-items:start}
+.sp{border:1px solid var(--line);border-radius:12px;padding:26px 24px;display:flex;flex-direction:column;background:rgba(255,255,255,.02)}
+.sp-top{display:flex;gap:20px;align-items:center}
+.sp h3{margin:0;font-size:24px;line-height:1.25}
+.sp-meta{display:flex;flex-wrap:wrap;gap:4px 14px;align-items:baseline;margin:6px 0 0;color:var(--muted);font-size:14px}
+.sp-price{color:var(--accent);font-size:18px;font-weight:600;font-variant-numeric:tabular-nums}
+.sp-intro{margin:20px 0 0;line-height:1.9;font-size:15px}
+.sp h4{margin:20px 0 8px;font-size:12px;letter-spacing:.14em;color:var(--accent);font-weight:600}
+.sp-pos{list-style:none;padding:0;margin:0;display:grid;gap:7px}
+.sp-pos li{display:flex;gap:10px;align-items:baseline;font-size:14px;color:var(--muted);line-height:1.6}
+.sp-pos b{flex:none;width:20px;height:20px;border-radius:50%;border:1px solid var(--accent);color:var(--accent);font-size:11px;display:inline-grid;place-items:center;font-family:Cinzel,serif}
+.sp-ask{margin:0;padding-left:18px;font-size:14px;line-height:1.85;color:var(--muted)}
+.sp-ask li::marker{color:var(--accent)}
+.sp-layout{position:relative;flex:none;width:96px;height:96px}
+.sp-layout i{position:absolute;width:16px;height:26px;border:1px solid var(--accent);border-radius:3px;background:var(--surface)}
+.sp-tri i:nth-child(1){left:20px;top:58px}.sp-tri i:nth-child(2){left:60px;top:58px}.sp-tri i:nth-child(3){left:40px;top:14px}
+.sp-row5 i{top:35px}
+.sp-row5 i:nth-child(1){left:0}.sp-row5 i:nth-child(2){left:20px}.sp-row5 i:nth-child(3){left:40px}.sp-row5 i:nth-child(4){left:60px}.sp-row5 i:nth-child(5){left:80px}
+.sp-celtic i{width:13px;height:21px}
+.sp-celtic i:nth-child(1){left:22px;top:37px}
+.sp-celtic i:nth-child(2){left:22px;top:37px;transform:rotate(90deg)}
+.sp-celtic i:nth-child(3){left:22px;top:71px}
+.sp-celtic i:nth-child(4){left:3px;top:37px}
+.sp-celtic i:nth-child(5){left:22px;top:3px}
+.sp-celtic i:nth-child(6){left:41px;top:37px}
+.sp-celtic i:nth-child(7){left:75px;top:75px}.sp-celtic i:nth-child(8){left:75px;top:51px}
+.sp-celtic i:nth-child(9){left:75px;top:27px}.sp-celtic i:nth-child(10){left:75px;top:3px}
+@media (max-width:1000px){.spreads-v2{grid-template-columns:1fr}}
 .p3-imgs{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
 .p3-imgs .ph-img{aspect-ratio:3/4}
 @media (max-width:860px){.topics,.spreads{grid-template-columns:1fr}.p3-steps{grid-template-columns:1fr 1fr}.p3-imgs{grid-template-columns:1fr 1fr}}
@@ -389,6 +418,7 @@ html[data-lang="en"] .p3-hero h1{font-size:clamp(36px,5.5vw,64px)}
 .bk-days{flex-wrap:nowrap;overflow-x:auto;padding-bottom:6px;scrollbar-width:thin}
 .bk-chip{flex:none;border:1px solid var(--line);background:var(--bg);border-radius:999px;padding:7px 15px;cursor:pointer;font-size:14px;line-height:1.3}
 .bk-chip small{display:block;font-size:11px;color:var(--muted)}
+.bk-spread{border-radius:12px;padding:8px 16px;text-align:left}
 .bk-chip[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--on-accent)}
 .bk-chip[aria-pressed="true"] small{color:inherit;opacity:.8}
 /* 时间按钮：两行分开，标签对齐 */
