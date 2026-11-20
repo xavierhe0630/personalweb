@@ -331,7 +331,7 @@ html[data-lang="en"] .p3-hero h1{font-size:clamp(36px,5.5vw,64px)}
 .sp h3{margin:0;font-size:24px;line-height:1.25}
 .sp-meta{display:flex;flex-wrap:wrap;gap:4px 14px;align-items:baseline;margin:6px 0 0;color:var(--muted);font-size:14px}
 .sp-price{color:var(--accent);font-size:18px;font-weight:600;font-variant-numeric:tabular-nums}
-.sp-intro{margin:20px 0 0;line-height:1.9;font-size:15px}
+.sp-intro{margin:0;line-height:1.9;font-size:15px}
 .sp h4{margin:20px 0 8px;font-size:12px;letter-spacing:.14em;color:var(--accent);font-weight:600}
 .sp-pos{list-style:none;padding:0;margin:0;display:grid;gap:7px}
 .sp-pos li{display:flex;gap:10px;align-items:baseline;font-size:14px;color:var(--muted);line-height:1.6}
@@ -352,7 +352,17 @@ html[data-lang="en"] .p3-hero h1{font-size:clamp(36px,5.5vw,64px)}
 .sp-celtic i:nth-child(6){left:41px;top:37px}
 .sp-celtic i:nth-child(7){left:75px;top:75px}.sp-celtic i:nth-child(8){left:75px;top:51px}
 .sp-celtic i:nth-child(9){left:75px;top:27px}.sp-celtic i:nth-child(10){left:75px;top:3px}
-@media (max-width:1000px){.spreads-v2{grid-template-columns:1fr}}
+/* 桌面上三张卡片等高：以第一张的高度为准，其余卡片内部滚动 */
+.sp-scroll{margin-top:20px;flex:1;min-height:0;overflow-y:auto;padding-right:10px}
+/* Chrome / Safari：自定义细滚动条，始终可见 */
+.sp-scroll::-webkit-scrollbar-thumb:hover{background:var(--ink)}
+/* Firefox 等不支持 ::-webkit-scrollbar 的浏览器 */
+@supports not selector(::-webkit-scrollbar){.sp-scroll{scrollbar-width:thin;scrollbar-color:var(--accent) transparent}}
+.sp-scroll::-webkit-scrollbar{width:4px}
+.sp-scroll::-webkit-scrollbar-thumb{background:var(--accent);border-radius:4px}
+.sp-scroll::-webkit-scrollbar-track{background:var(--line);border-radius:4px}
+.sp-scroll.more{-webkit-mask-image:linear-gradient(to bottom,#000 calc(100% - 48px),transparent);mask-image:linear-gradient(to bottom,#000 calc(100% - 48px),transparent)}
+@media (max-width:1000px){.spreads-v2{grid-template-columns:1fr}.sp{height:auto!important}.sp-scroll{overflow:visible}.sp-scroll.more{-webkit-mask-image:none;mask-image:none}}
 .p3-imgs{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
 .p3-imgs .ph-img{aspect-ratio:3/4}
 @media (max-width:860px){.topics,.spreads{grid-template-columns:1fr}.p3-steps{grid-template-columns:1fr 1fr}.p3-imgs{grid-template-columns:1fr 1fr}}
