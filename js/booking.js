@@ -19,6 +19,8 @@
     s1: { zh: "选择项目", en: "Choose a service" },
     s2: { zh: "选择时长", en: "Choose a length" },
     sM: { zh: "选择问卜方式", en: "Choose a method" },
+    from: { zh: "{p} 起", en: "From {p}" },
+    nOpts: { zh: "{n} 种牌阵可选", en: "{n} spreads to choose from" },
     needMethod: { zh: "请先选择问卜方式。", en: "Please choose a method first." },
     methodLab: { zh: "方式", en: "Method" },
     s3: { zh: "选择日期", en: "Choose a date" },
@@ -117,6 +119,13 @@
   var METHOD_SERVICES = ["yijing", "both"];
   function needsMethod(s) { return !!s && METHOD_SERVICES.indexOf(s.key) >= 0; }
   function methodName(k) { var m = METHODS.filter(function (x) { return x.k === k; })[0]; return m ? window.I18N.t(m) : ""; }
+  /* 同一 group 的项目（例如三种塔罗牌阵）在第一步合并成一张卡片，第二步再选具体项目 */
+  var GROUPS = {
+    tarot: { zh: "塔罗梳理", en: "Tarot", desc_zh: "梳理思路与规划", desc_en: "Clarity and planning", pick: { zh: "选择牌阵", en: "Choose a spread" } }
+  };
+  function groupLabel(g) { var x = GROUPS[g]; return x ? window.I18N.t(x) : g; }
+  function fullName(s) { return s && s.group ? groupLabel(s.group) + (window.I18N.get() === "zh" ? "，" : ", ") + svcName(s) : (s ? svcName(s) : ""); }
+  function priceText(s) { return "$" + money(s.price_usd) + " / ¥" + money(s.price_cny); }
   function svcName(s) { return window.I18N.get() === "zh" ? (s.name_zh || s.name_en) : (s.name_en || s.name_zh); }
   function svcDesc(s) { return window.I18N.get() === "zh" ? (s.desc_zh || "") : (s.desc_en || ""); }
 
@@ -149,9 +158,10 @@
     return {
       demo: true, tz: OTZ, slots: slots,
       services: [
-        { key: "yijing", name_zh: "易经问卜", name_en: "I Ching reading", mode: "session", minutes: 45, durations: [], price_usd: 40, price_cny: 288, desc_zh: "一事一卦", desc_en: "One question, one hexagram" },
-        { key: "tarot", name_zh: "塔罗梳理", name_en: "Tarot planning", mode: "duration", minutes: 30, durations: [30, 60, 90], price_usd: 25, price_cny: 168, desc_zh: "梳理思路与规划", desc_en: "Sort out your thinking and plan" },
-        { key: "both", name_zh: "易经 + 塔罗", name_en: "I Ching + Tarot", mode: "session", minutes: 90, durations: [], price_usd: 70, price_cny: 488, desc_zh: "两种方式同时进行", desc_en: "Both in one session" }
+        { key: "yijing", name_zh: "易经问卜", name_en: "I Ching reading", mode: "session", minutes: 45, durations: [], price_usd: 30, price_cny: 188, desc_zh: "一事一卦", desc_en: "One question, one hexagram" },
+        { key: "tarot-sacred", group: "tarot", name_zh: "圣三角牌阵", name_en: "Sacred Triangle", mode: "session", minutes: 30, durations: [], price_usd: 15, price_cny: 88, desc_zh: "", desc_en: "" },
+        { key: "tarot-problem", group: "tarot", name_zh: "问题解决牌阵", name_en: "Problem-Solving Spread", mode: "session", minutes: 45, durations: [], price_usd: 20, price_cny: 133, desc_zh: "", desc_en: "" },
+        { key: "tarot-celtic", group: "tarot", name_zh: "凯尔特十字阵", name_en: "Celtic Cross", mode: "session", minutes: 60, durations: [], price_usd: 30, price_cny: 211, desc_zh: "", desc_en: "" }
       ]
     };
   }
@@ -188,13 +198,13 @@
     if (s.mode === "duration" && !this.dur) return [];
     var n = need(s, this.dur), now = Date.now();
     return data.slots.filter(function (x) {
-      return x.left > 0 && x.start > now && x.minutes >= n && (!x.services || !x.services.length || x.services.indexOf(s.key) >= 0);
+      return x.left > 0 && x.start > now && x.minutes >= n && (!x.services || !x.services.length || x.services.indexOf(s.key) >= 0 || (s.group && x.services.indexOf(s.group) >= 0));
     }).sort(function (a, b) { return a.start - b.start; });
   };
   Widget.prototype.ensureDefaults = function () {
     var svcs = this.services();
     if (!this.svc && svcs.length) {
-      var d = this.def; this.svc = (svcs.filter(function (s) { return s.key === d; })[0] || svcs[0]).key;
+      var d = this.def; this.svc = (svcs.filter(function (s) { return s.key === d; })[0] || svcs.filter(function (s) { return s.group === d; })[0] || svcs[0]).key;
     }
     var s = this.svcObj();
     if (s && s.mode === "duration") {
@@ -224,13 +234,37 @@
     h += '<div class="bk">';
     if (data.demo) h += '<p class="bk-demo">' + t(S.demo) + "</p>";
 
+    // 第一步：项目（同组合并成一张卡片）
+    var entries = [], seenG = {};
+    this.services().forEach(function (x) {
+      if (!x.group) entries.push({ s: x });
+      else if (!seenG[x.group]) { seenG[x.group] = { g: x.group, members: [] }; entries.push(seenG[x.group]); }
+      if (x.group) seenG[x.group].members.push(x);
+    });
     h += '<div class="bk-step"><h3>' + t(S.s1) + '</h3><div class="bk-svcs">' +
-      this.services().map(function (x) {
-        var line = x.mode === "duration" ? t(S.perUnit, { n: x.minutes }) : t(S.mins, { n: x.minutes });
-        return '<button type="button" class="bk-opt" data-act="svc" data-v="' + esc(x.key) + '" aria-pressed="' + (x.key === self.svc) + '">' +
-          "<b>" + esc(svcName(x)) + "</b>" + (svcDesc(x) ? "<small>" + esc(svcDesc(x)) + "</small>" : "") +
-          '<span class="bk-price">$' + money(x.price_usd) + " / ¥" + money(x.price_cny) + '</span><small>' + line + "</small></button>";
+      entries.map(function (en) {
+        if (en.s) {
+          var x = en.s, line = x.mode === "duration" ? t(S.perUnit, { n: x.minutes }) : t(S.mins, { n: x.minutes });
+          return '<button type="button" class="bk-opt" data-act="svc" data-v="' + esc(x.key) + '" aria-pressed="' + (x.key === self.svc) + '">' +
+            "<b>" + esc(svcName(x)) + "</b>" + (svcDesc(x) ? "<small>" + esc(svcDesc(x)) + "</small>" : "") +
+            '<span class="bk-price">' + priceText(x) + '</span><small>' + line + "</small></button>";
+        }
+        var G = GROUPS[en.g] || {}, cheapest = en.members.slice().sort(function (a, b) { return a.price_usd - b.price_usd; })[0];
+        var desc = window.I18N.get() === "zh" ? G.desc_zh : G.desc_en;
+        return '<button type="button" class="bk-opt" data-act="grp" data-v="' + esc(en.g) + '" aria-pressed="' + (!!s && s.group === en.g) + '">' +
+          "<b>" + esc(groupLabel(en.g)) + "</b>" + (desc ? "<small>" + esc(desc) + "</small>" : "") +
+          '<span class="bk-price">' + t(S.from, { p: priceText(cheapest) }) + '</span><small>' + t(S.nOpts, { n: en.members.length }) + "</small></button>";
       }).join("") + "</div></div>";
+
+    // 第二步（仅限分组项目）：选择具体牌阵
+    if (s && s.group) {
+      var members = this.services().filter(function (x) { return x.group === s.group; });
+      h += '<div class="bk-step"><h3>' + t((GROUPS[s.group] || {}).pick || S.s1) + '</h3><div class="bk-chips">' +
+        members.map(function (x) {
+          return '<button type="button" class="bk-chip bk-spread" data-act="svc" data-v="' + esc(x.key) + '" aria-pressed="' + (x.key === self.svc) + '">' +
+            esc(svcName(x)) + "<small>" + priceText(x) + (window.I18N.get() === "zh" ? "，" : ", ") + t(S.mins, { n: x.minutes }) + "</small></button>";
+        }).join("") + "</div></div>";
+    }
 
     if (needsMethod(s)) {
       h += '<div class="bk-step"><h3>' + t(S.sM) + '</h3><div class="bk-chips">' +
@@ -271,7 +305,7 @@
       var slot = data.slots.filter(function (x) { return x.id === self.slot; })[0];
       var p = price(s, this.dur), f = this.form;
       h += '<form class="bk-step bk-form" novalidate><h3>' + t(S.s5) + "</h3>" +
-        '<div class="bk-sum"><div class="bk-sum-head"><span class="bk-sum-svc">' + esc(svcName(s)) + (needsMethod(s) && this.method ? (window.I18N.get() === "zh" ? "，" : ", ") + esc(methodName(this.method)) : "") + "</span><span>" + t(S.mins, { n: p.minutes }) + '</span><b>$' + money(p.usd) + " / ¥" + money(p.cny) + "</b></div>" + bothLines(slot.start) + "</div>" +
+        '<div class="bk-sum"><div class="bk-sum-head"><span class="bk-sum-svc">' + esc(fullName(s)) + (needsMethod(s) && this.method ? (window.I18N.get() === "zh" ? "，" : ", ") + esc(methodName(this.method)) : "") + "</span><span>" + t(S.mins, { n: p.minutes }) + '</span><b>$' + money(p.usd) + " / ¥" + money(p.cny) + "</b></div>" + bothLines(slot.start) + "</div>" +
         '<label class="bk-field"><span>' + t(S.name) + '</span><input name="name" maxlength="60" autocomplete="name" value="' + esc(f.name) + '" required></label>' +
         '<div class="bk-row"><label class="bk-field bk-narrow"><span>' + t(S.contactType) + '</span><select name="ctype">' +
         ["wechat", "email", "phone"].map(function (k) { return '<option value="' + k + '"' + (f.ctype === k ? " selected" : "") + ">" + t(S[k]) + "</option>"; }).join("") +
@@ -308,7 +342,7 @@
     }
     return '<div class="bk bk-done" tabindex="-1">' + (data && data.demo ? '<p class="bk-demo">' + t(S.demo) + "</p>" : "") +
       '<h3 class="bk-title">' + t(S.done) + '</h3><p class="bk-id">' + t(S.idLabel) + " <b>" + esc(r.id) + "</b></p>" +
-      '<div class="bk-sum"><div class="bk-sum-head"><span class="bk-sum-svc">' + esc(rs ? svcName(rs) : r.svcKey) + (r.method ? (window.I18N.get() === "zh" ? "，" : ", ") + esc(methodName(r.method)) : "") + "</span><span>" + t(S.mins, { n: r.minutes }) + "</span></div>" + bothLines(r.start) + "</div>" +
+      '<div class="bk-sum"><div class="bk-sum-head"><span class="bk-sum-svc">' + esc(rs ? fullName(rs) : r.svcKey) + (r.method ? (window.I18N.get() === "zh" ? "，" : ", ") + esc(methodName(r.method)) : "") + "</span><span>" + t(S.mins, { n: r.minutes }) + "</span></div>" + bothLines(r.start) + "</div>" +
       "<h3>" + t(S.payTitle) + '</h3><div class="bk-chips">' + tabs + "</div>" + panel +
       '<p class="bk-note">' + t(S.memo) + " " + esc(t(C.confirmNote || "")) + "</p>" +
       '<button type="button" class="bk-chip" data-act="again">' + t(S.again) + "</button></div>";
@@ -319,6 +353,11 @@
     var a = b.getAttribute("data-act"), v = b.getAttribute("data-v");
     if (this.step === "pick") this.saveForm();
     if (a === "svc") { this.svc = v; this.slot = null; this.msg = ""; }
+    else if (a === "grp") {
+      var cur = this.svcObj();
+      if (!cur || cur.group !== v) { var first = this.services().filter(function (x) { return x.group === v; })[0]; if (first) this.svc = first.key; }
+      this.slot = null; this.msg = "";
+    }
     else if (a === "dur") { this.dur = +v; this.slot = null; }
     else if (a === "method") { this.method = v; this.msg = ""; }
     else if (a === "day") { this.day = v; this.slot = null; }
@@ -361,12 +400,21 @@
       }
     };
     this.busy = true; this.msg = ""; this.render();
-    if (data.demo) { var pre = { yijing: "IC", tarot: "TR", both: "TI" }[s.key] || "BK"; demoIds[pre] = (demoIds[pre] || 999) + 1; setTimeout(function () { done({ ok: true, id: pre + demoIds[pre] }); }, 500); return; }
+    if (data.demo) { var pre = { yijing: "IC", tarot: "TR", both: "TI" }[s.group || s.key] || "BK"; demoIds[pre] = (demoIds[pre] || 999) + 1; setTimeout(function () { done({ ok: true, id: pre + demoIds[pre] }); }, 500); return; }
     fetch(C.bookingApi, { method: "POST", body: JSON.stringify(payload) })
       .then(function (r) { return r.json(); })
       .then(done)
       .catch(function () { done({ ok: false, error: "network" }); });
   };
+
+  // 把页面上 data-price-for="项目代号" 的位置填上表格里的价格（如塔罗牌阵介绍）
+  function fillPrices() {
+    if (!data) return;
+    document.querySelectorAll("[data-price-for]").forEach(function (el) {
+      var k = el.getAttribute("data-price-for"), s = (data.services || []).filter(function (x) { return x.key === k; })[0];
+      el.textContent = s ? priceText(s) : "";
+    });
+  }
 
   function renderAll(except) { widgets.forEach(function (w) { if (w !== except && w.step === "pick") { w.saveForm(); w.render(); } }); }
 
@@ -374,7 +422,7 @@
     document.querySelectorAll("[data-booking]").forEach(function (el) { widgets.push(new Widget(el)); });
     if (!widgets.length) return;
     widgets.forEach(function (w) { w.render(); });
-    load().then(function () { widgets.forEach(function (w) { w.render(); }); });
+    load().then(function () { fillPrices(); widgets.forEach(function (w) { w.render(); }); });
   }
   document.addEventListener("langchange", function () {
     if (!widgets.length) init(); else widgets.forEach(function (w) { if (w.step === "pick") w.saveForm(); w.render(); });
