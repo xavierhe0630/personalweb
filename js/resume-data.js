@@ -130,8 +130,8 @@
         org: L("Python (pandas, NumPy, SciPy), D3.js", "Python（pandas、NumPy、SciPy）、D3.js"),
         role: L("U.S. Cancer Incidence & Mortality Forecasting, 2014–2030", "美国十大癌症发病率与死亡率预测（2014–2030）"),
         blocksZh: [ // 中文版：工作内容 / 业务产出 格式
-          {"t": "预测建模", "w": "基于 SEER 2014–2023 年数据，预测美国十大常见癌症至 2030 年的年龄标化发病率与死亡率，组合对数线性趋势模型（加入 2020 年指示变量，避免疫情下滑拉低趋势）与阻尼趋势模型（φ = 0.8）形成集成预测，并给出 95% 预测区间。", "o": "以 2014–2019 年训练、2021–2023 年回测，死亡率预测误差（MAPE）2.5%，较“不变”基准的 5.0% 降低一半，量化 2020 年诊断缺口为趋势值以下 4–14%。"},
-          {"t": "交互看板", "w": "用 D3.js 搭建交互看板，包含癌种浏览、排名变化动画、发病与死亡对比图和可排序汇总表。"}
+          {"t": "项目目的与用途", "p": "基于 SEER 2014–2023 年数据，预测美国十大常见癌症到 2030 年的年龄标化发病率与死亡率，并给出 95% 预测区间。2020 年疫情导致大量诊断延后，建模时专门处理了这一年的异常下降，避免它拉低长期趋势。结果通过 D3.js 交互看板呈现，可以按癌种查看历史数据、预测走势、排名变化，以及发病率与死亡率的对比。"},
+          {"t": "项目成果", "p": "将对数线性趋势模型与阻尼趋势模型（φ = 0.8）组合为集成预测。以 2014–2019 年数据训练、2021–2023 年数据回测，死亡率预测误差（MAPE）为 2.5%，比“不变”基准的 5.0% 降低一半，发病率与基准持平。同时量化出 2020 年各癌种的诊断缺口为趋势值以下 4–14%。"}
         ],
         points: [
           L("Forecast age-adjusted incidence and mortality rates for the ten most common U.S. cancers through 2030 from SEER 2014–2023 data, with 95% prediction intervals.",
@@ -149,13 +149,11 @@
         ]
       },
       {
-        org: L("Python, Flask, Azure SQL, Azure OpenAI, Leaflet, Chart.js", "Python, Flask, Azure SQL, Azure OpenAI, Leaflet, Chart.js"),
+        org: L("Python, Flask, Azure SQL, Azure OpenAI, Leaflet, Chart.js", "Python、Flask、Azure SQL、Azure OpenAI、Leaflet、Chart.js"),
         role: L("Retail Site-Selection Decision Support", "零售选址决策支持系统"),
-        summaryZh: "3 人团队核心开发者，承担约 70% 的开发、调试与功能迭代，并负责项目报告。",
         blocksZh: [ // 中文版：工作内容 / 业务产出 格式
-          {"t": "项目统筹与开发", "w": "负责数据通道搭建、项目推进、网站开发与功能验证，在包含 149 个社区、4,000+ 兴趣点的 Azure SQL 数据集上实现 Huff 引力模型。", "o": "可预测 20+ 业态候选门店的客流与市场份额。"},
-          {"t": "AI 助手", "w": "基于 Azure OpenAI 工具调用实现“AI 作为控制器”的聊天助手，通过对话收集输入并调用真实的预测引擎。", "o": "避免模型编造数字，保证结果有据可查。"},
-          {"t": "竞品情报与上线", "w": "开发 3 英里内竞品门店情报功能，在 Leaflet 地图与 Chart.js 看板中展示距离、规模与客流，设置分级置信度标签与精度护栏，通过 GitHub Actions 持续部署至 Azure App Service。"}
+          {"t": "项目目的与用途", "p": "为零售商在伍斯特（Worcester）选址提供决策支持。用户选择候选地点、业态和门店面积后，系统基于 Huff 引力模型和包含 149 个社区、4,000+ 兴趣点的 Azure SQL 数据集，预测门店的客流与市场份额，并在 Leaflet 地图和 Chart.js 看板上展示 3 英里内竞品门店的距离、规模和客流。用户也可以通过 Azure OpenAI 聊天助手以对话方式完成分析，助手只负责收集输入并调用真实的预测引擎，不会编造数字。"},
+          {"t": "项目成果", "p": "作为 3 人团队的核心开发者，承担约 70% 的开发、调试与功能迭代，负责数据通道搭建、项目推进、网站开发、功能验证和项目报告。系统覆盖 20+ 业态，为预测结果设置了分级置信度标签与精度护栏，并通过 GitHub Actions 持续部署到 Azure App Service。"}
         ],
         points: [
           L("Led about 70% of development, debugging, and feature updates on a 3-person team, owning the data pipeline, website, feature validation, project coordination, and final report.",
@@ -298,7 +296,7 @@
       { name: L("SQL for Data Analysis", "SQL 数据分析"), when: "2023-09" },
       { name: L("Sales Development Certificate", "销售拓展证书"), when: "2022-07" },
       { name: L("Project Management Essential Certification (PMEC)", "项目管理基础认证（PMEC）"), when: "2022-06" },
-      { name: L("Dementia Care: Understanding Alzheimer’s Disease", "痴呆症护理：认识阿尔茨海默病"), when: "2022-05" }
+      { name: L("Dementia Care: Understanding Alzheimer’s Disease", "痴呆症护理：认识阿尔茨海默症"), when: "2022-05" }
     ],
 
     // 照片墙：把照片放进 assets 文件夹，然后在 src 填路径，例如 "assets/work-1.jpg"
