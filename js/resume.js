@@ -65,15 +65,26 @@
   function head(key) {
     return '<div class="sec-head"><h2>' + esc(t(LAB[key])) + "</h2></div>";
   }
-  function rows(list) {
+  // 中文版用「工作内容 / 业务产出」格式（数据在 resume-data.js 的 blocksZh），英文版用要点列表
+  function blocks(x, outLabel) {
+    return '<div class="blocks">' + (x.summaryZh ? '<p class="blk-sum">' + esc(x.summaryZh) + "</p>" : "") + x.blocksZh.map(function (b) {
+      // 一段话格式（领导力、社区服务）：小标题加冒号，后接整段描述
+      if (b.p) return '<div class="blk blk-p"><p><b class="blk-t">' + esc(b.t) + "：</b>" + esc(b.p) + "</p></div>";
+      return '<div class="blk"><h4>' + esc(b.t) + "</h4>" +
+        '<p><b>工作内容：</b>' + esc(b.w) + "</p>" +
+        (b.o ? "<p><b>" + esc(b.ol || outLabel) + "：</b>" + esc(b.o) + "</p>" : "") + "</div>";
+    }).join("") + "</div>";
+  }
+  function rows(list, outLabel) {
     return list.map(function (x) {
       return '<article class="row"><div class="when' + (x.group ? " has-group" : "") + '">' +
         (x.group ? '<b class="grp">' + esc(t(x.group)) + "</b>" : "") + "<b>" + esc(t(x.org)) + "</b>" +
         (x.when ? '<span class="dates">' + range(x.when) + "</span>" : "") +
         (x.where ? "<span>" + esc(t(x.where)) + "</span>" : "") +
-        '</div><div class="what"><h3>' + esc(t(x.role)) + "</h3><ul>" +
-        x.points.map(function (p) { return "<li>" + esc(t(p)) + "</li>"; }).join("") +
-        "</ul>" + showcase(x) + "</div></article>";
+        '</div><div class="what"><h3>' + esc(t(x.role)) + "</h3>" +
+        (zh() && x.blocksZh ? blocks(x, outLabel || "业务产出")
+          : "<ul>" + x.points.map(function (p) { return "<li>" + esc(t(p)) + "</li>"; }).join("") + "</ul>") +
+        showcase(x) + "</div></article>";
     }).join("");
   }
 
@@ -99,7 +110,7 @@
       jumps.map(function (k, i) { return '<button type="button" class="c' + (i % 3 + 1) + '" data-jump="' + k + '">' + esc(t(JUMP_LAB[k])) + "</button>"; }).join("") +
       "</nav></div>";
 
-    h += '<section class="sec c1" id="experience">' + head("experience") + rows(R.experience) + "</section>";
+    h += '<section class="sec c1" id="experience">' + head("experience") + rows(R.experience, "业务产出") + "</section>";
 
     var E = R.education;
     h += '<section class="sec c2" id="education">' + head("education") +
@@ -111,9 +122,9 @@
       '<figure class="portrait"><img src="' + esc(src(E.photo)) + '" alt="' + esc(t(LAB.photoAlt)) + '" loading="lazy"></figure>' +
       "</div></section>";
 
-    h += '<section class="sec c3" id="project">' + head("project") + rows(R.project) + "</section>";
-    h += '<section class="sec c1" id="leadership">' + head("leadership") + rows(R.leadership) + "</section>";
-    h += '<section class="sec c2" id="community">' + head("community") + rows(R.community) + "</section>";
+    h += '<section class="sec c3" id="project">' + head("project") + rows(R.project, "项目成果") + "</section>";
+    h += '<section class="sec c1" id="leadership">' + head("leadership") + rows(R.leadership, "成果") + "</section>";
+    h += '<section class="sec c2" id="community">' + head("community") + rows(R.community, "成果") + "</section>";
 
     h += '<section class="sec c3" id="skills"><div class="two"><div>' + head("skills") +
       R.skills.map(function (s, i) {
