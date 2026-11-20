@@ -75,10 +75,25 @@
   }
   function markScroll(box) {
     if (!box) return;
-    var more = box.scrollHeight - box.clientHeight - box.scrollTop > 4;
-    box.classList.toggle("more", more);
+    var card = box.closest(".sp"), range = box.scrollHeight - box.clientHeight;
+    box.classList.toggle("more", range - box.scrollTop > 4);
+    card.classList.toggle("scrollable", range > 4);
+    var thumb = card.querySelector(".sp-thumb");
+    if (!thumb) { thumb = document.createElement("span"); thumb.className = "sp-thumb"; thumb.setAttribute("aria-hidden", "true"); card.appendChild(thumb); }
+    var travel = Math.max(0, box.clientHeight - thumb.offsetHeight);
+    var y = box.offsetTop + (range > 0 ? box.scrollTop / range * travel : 0);
+    thumb.style.transform = "translateY(" + y + "px)";
   }
-  document.querySelectorAll(".sp-scroll").forEach(function (b) { b.addEventListener("scroll", function () { markScroll(b); }, { passive: true }); });
+  document.querySelectorAll(".sp-scroll").forEach(function (b) {
+    var timer = null;
+    b.addEventListener("scroll", function () {
+      markScroll(b);
+      var th = b.closest(".sp").querySelector(".sp-thumb");
+      if (!th) return;
+      th.classList.add("on"); clearTimeout(timer);
+      timer = setTimeout(function () { th.classList.remove("on"); }, 900);
+    }, { passive: true });
+  });
   window.addEventListener("resize", equalizeSpreads);
   window.addEventListener("hashchange", function () { setTimeout(equalizeSpreads, 0); });
   document.addEventListener("langchange", function () { setTimeout(equalizeSpreads, 0); });
