@@ -61,6 +61,30 @@
     if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
   });
 
+  // 塔罗牌阵卡片：桌面上统一高度（以第一张为准），内容多的卡片在内部滚动
+  function equalizeSpreads() {
+    var cards = document.querySelectorAll(".spreads-v2 .sp");
+    if (!cards.length) return;
+    cards.forEach(function (c) { c.style.height = ""; });
+    var wide = window.matchMedia("(min-width: 1001px)").matches;
+    if (wide && cards[0].offsetParent) {
+      var h = cards[0].offsetHeight;
+      cards.forEach(function (c) { c.style.height = h + "px"; });
+    }
+    cards.forEach(function (c) { markScroll(c.querySelector(".sp-scroll")); });
+  }
+  function markScroll(box) {
+    if (!box) return;
+    var more = box.scrollHeight - box.clientHeight - box.scrollTop > 4;
+    box.classList.toggle("more", more);
+  }
+  document.querySelectorAll(".sp-scroll").forEach(function (b) { b.addEventListener("scroll", function () { markScroll(b); }, { passive: true }); });
+  window.addEventListener("resize", equalizeSpreads);
+  window.addEventListener("hashchange", function () { setTimeout(equalizeSpreads, 0); });
+  document.addEventListener("langchange", function () { setTimeout(equalizeSpreads, 0); });
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(equalizeSpreads);
+  setTimeout(equalizeSpreads, 0);
+
   // 塔罗翻牌
   document.querySelectorAll(".card").forEach(function (c) {
     c.addEventListener("click", function () { c.classList.toggle("flipped"); });
