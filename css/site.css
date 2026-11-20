@@ -95,6 +95,14 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .what h3{margin:0 0 10px;font-size:19px;font-weight:600;letter-spacing:-.01em}
 .what ul{margin:0;padding-left:18px;font-size:16px;font-family:"Noto Sans SC",Archivo,sans-serif}
 .what li{margin:8px 0}
+/* 中文版：工作内容 / 业务产出 */
+.blocks{display:flex;flex-direction:column;gap:16px;font-family:"Noto Sans SC",Archivo,sans-serif}
+.blk-sum{margin:-4px 0 2px;font-size:15px;line-height:1.75;padding-left:12px;border-left:3px solid var(--sc,var(--c1));color:var(--ink)}
+.blk h4{margin:0 0 4px;font-size:16px;font-weight:700;text-decoration:underline;text-decoration-color:var(--sc,var(--c1));text-decoration-thickness:2px;text-underline-offset:5px}
+.blk p{margin:3px 0 0;font-size:15px;line-height:1.8}
+.blk p b{font-weight:500;color:var(--muted)}
+.blk-p p{margin:0}
+.blk p b.blk-t{font-weight:700;color:var(--ink)}
 .what li::marker{color:var(--sc,var(--c1))}
 .proj-show{margin-top:18px;display:flex;flex-direction:column;gap:12px;max-width:760px}
 .proj-shot{display:block;border:1px solid var(--line);border-radius:10px;overflow:hidden;background:var(--surface);transition:border-color .2s,transform .2s}
@@ -171,6 +179,7 @@ a.proj-shot:hover{border-color:var(--sc,var(--c1));transform:translateY(-2px)}
   .what h3{font-size:12px;margin-bottom:2px}
   .what ul,.when,.cert,.school p{font-size:10.5px}
   .what li{margin:1px 0}
+  .blocks{gap:4px}.blk-sum{font-size:10.5px;margin:0}.blk h4{font-size:11.5px;margin:0}.blk p{font-size:10.5px;line-height:1.45;margin:0}
   body{line-height:1.4}
   .when b{font-size:12px}
   .when b.grp{font-size:13px}
